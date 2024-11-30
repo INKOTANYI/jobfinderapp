@@ -334,7 +334,7 @@
                                     <div class="col-md-6">
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="name"
-                                                 placeholder="Your Name">
+                                                placeholder="Your Name">
                                             <label for="name">Your Name</label>
                                         </div>
                                     </div>
