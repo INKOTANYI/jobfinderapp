@@ -55,11 +55,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <a href="#Home" class="nav-item nav-link active">Home</a>
+                    <a href="#AboutUs" class="nav-item nav-link">About</a>
 
                 </div>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="#ContactUs" class="nav-item nav-link">Contact</a>
             </div>
 
             <div class="nav-item dropdown">
@@ -131,7 +131,7 @@
         </div>
         <!-- Search End -->
 
-        <div class="container">
+        <div class="container" id="AboutUs">
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">About This Platform
             </h1>
             <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
@@ -213,20 +213,6 @@
                 </div>
             </div>
         </div>
-        <!-- Category End -->
-
-
-        <!-- About Start -->
-
-        <!-- About End -->
-
-
-        <!-- Jobs Start -->
-
-
-
-        <!-- Jobs End -->
-
 
         <!-- Testimonial Start -->
         <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -291,7 +277,7 @@
         <!-- Testimonial End -->
 
         <!-- Contact Start -->
-        <div class="container-xxl py-5">
+        <div class="container-xxl py-5" id="ContactUs">
             <div class="container">
                 <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Contact For Any Query</h1>
                 <div class="row g-4">

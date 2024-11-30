@@ -156,17 +156,20 @@
                             @csrf
                             <div class="form-group">
                                 <label for="fname">First Name:</label>
-                                <input type="text" name="fname" id="fname" class="form-control form-control-lg" required>
+                                <input type="text" name="fname" id="fname" class="form-control form-control-lg"
+                                    required>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="lname">Last Name:</label>
-                                <input type="text" name="lname" id="lname"  class="form-control form-control-lg"required>
+                                <input type="text" name="lname" id="lname"
+                                    class="form-control form-control-lg"required>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" name="email" id="email"  class="form-control form-control-lg" required>
+                                <input type="email" name="email" id="email" class="form-control form-control-lg"
+                                    required>
                             </div>
                             <br>
                             <div class="form-group">
