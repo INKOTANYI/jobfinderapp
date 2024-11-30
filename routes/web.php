@@ -70,5 +70,8 @@ Route::get('homepage', function () {
     return view('welcome');
 })->name('homepage');
 
+Route::get('/search-engineers', [EngineerController::class, 'searchEngineers']);
+
+
 
 require __DIR__.'/auth.php';

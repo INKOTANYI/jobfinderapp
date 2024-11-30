@@ -94,6 +94,29 @@ class EngineerController extends Controller
 
 
 
+    public function searchEngineers(Request $request)
+{
+    $query = Engineer::query();
+
+    if ($request->has('department') && $request->department != '') {
+        $query->where('department_id', $request->department);
+    }
+
+    if ($request->has('district') && $request->district != '') {
+        $query->where('district_id', $request->district);
+    }
+
+    if ($request->has('sector') && $request->sector != '') {
+        $query->where('sector_id', $request->sector);
+    }
+
+    $engineers = $query->get(); // Fetch engineers based on filters
+
+    return view('engineer.search-results', compact('engineers'));
+}
+
+
+
 
     }
 
