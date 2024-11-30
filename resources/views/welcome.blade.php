@@ -370,15 +370,15 @@
                 <div class="row g-5">
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Company</h5>
-                        <a class="btn btn-link text-white-50" href="">About Us</a>
+                        <a class="btn btn-link text-white-50" href="#Home">About Us</a>
                         <a class="btn btn-link text-white-50" href="">Contact Us</a>
-                        <a class="btn btn-link text-white-50" href="">Register</a>
+                        <a class="btn btn-link text-white-50" href="{{ route('create-application') }}">Register</a>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Quick Links</h5>
-                        <a class="btn btn-link text-white-50" href="">About Us</a>
-                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
-                        <a class="btn btn-link text-white-50" href="">Register</a>
+                        <a class="btn btn-link text-white-50" href="#AboutUs">About Us</a>
+                        <a class="btn btn-link text-white-50" href="#ContactUs">Contact Us</a>
+                        <a class="btn btn-link text-white-50" href="{{ route('create-application') }}">Register</a>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Contact</h5>
