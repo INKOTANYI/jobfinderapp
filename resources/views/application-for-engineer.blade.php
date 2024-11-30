@@ -194,7 +194,7 @@
             <div class="row">
                 <div class="col-md-3 register-left">
                     <img src="//https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
-                    <h3>Welcome to [JobFinder]!</h3>
+                    <h3>Welcome to engineering  Market Solution !</h3>
                     </br>
                     <p>Your career journey starts here! 🌟
 
@@ -215,12 +215,12 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="home" role="tabpanel"
                                 aria-labelledby="home-tab">
-                                <h3 class="register-heading">Applicant Application Form</h3>
+                                <h3 class="register-heading">Engineers Application Form</h3>
                                 <br>
                                 <div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <h2>Applicant Profile</h2>
+                                            <h2>Engineers Profile</h2>
                                         </div>
                                         <div class="form-group">
                                             <label for="fname">First Name:</label>
@@ -270,7 +270,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <h2>Applicant Aploads</h2>
+                                            <h2>Engineers Aploads</h2>
                                         </div>
                                         <div class="form-group">
                                             <label for="cv_path">Upload CV (PDF only):</label>
@@ -289,7 +289,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="mb-3">
-                                                <h2> Applicant Adress </h2>
+                                                <h2> Engineers Adress </h2>
                                             </div>
                                             <div class="form-group">
                                                 <label for="province">Province:</label>
