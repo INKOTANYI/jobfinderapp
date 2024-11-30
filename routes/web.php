@@ -66,5 +66,9 @@ Route::get('home', function () {
     return view('admin-application');
 })->name('home');
 
+Route::get('homepage', function () {
+    return view('welcome');
+})->name('homepage');
+
 
 require __DIR__.'/auth.php';

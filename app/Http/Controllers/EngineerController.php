@@ -18,7 +18,7 @@ class EngineerController extends Controller
         $districts = District::all();
         $sectors = Sector::all();
         $departements = Departement::all();
-        return view('application', compact(['provinces'
+        return view('application-for-engineer', compact(['provinces'
            ,'districts',
            'sectors',
            'departements'
