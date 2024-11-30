@@ -60,6 +60,7 @@
 
                 </div>
                 <a href="#ContactUs" class="nav-item nav-link">Contact</a>
+                <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
             </div>
 
             <div class="nav-item dropdown">
