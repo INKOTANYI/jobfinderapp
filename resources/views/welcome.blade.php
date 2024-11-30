@@ -321,12 +321,20 @@
                     </div>
                     <div class="col-md-6">
                         <div class="wow fadeInUp" data-wow-delay="0.5s">
+
+                            @if (session('success'))
+                                <div style="color: green;">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                             <form>
+
+                                @csrf
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="name"
-                                                placeholder="Your Name">
+                                                 placeholder="Your Name">
                                             <label for="name">Your Name</label>
                                         </div>
                                     </div>

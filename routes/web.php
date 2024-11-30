@@ -7,6 +7,7 @@ use App\Http\Controllers\SectorController;
 use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\EngineerController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -72,6 +73,7 @@ Route::get('homepage', function () {
 
 Route::get('/search-engineers', [EngineerController::class, 'searchEngineers']);
 
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 
 require __DIR__.'/auth.php';
