@@ -385,20 +385,11 @@
                         <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>KN 48 Street, Kigali, Rwanda</p>
                         <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+250788793491</p>
                         <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
-                        <div class="d-flex pt-2">
-                            <a class="btn btn-outline-light btn-social" href=""><i
-                                    class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i
-                                    class="fab fa-youtube"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i
-                                    class="fab fa-linkedin-in"></i></a>
-                        </div>
+
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Newsletter</h5>
-                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                        <p>Stay tuned for more updates.</p>
                         <div class="position-relative mx-auto" style="max-width: 400px;">
                             <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text"
                                 placeholder="Your email">
