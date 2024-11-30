@@ -64,7 +64,7 @@ class EngineerController extends Controller
         ]);
         
 
-        return back('welcome')->with('success', 'Engineer information and files saved successfully!');
+        return redirect()->route('homepage')->with('success', 'Engineer information and files saved successfully!');
     }
 
     public function get_All(){

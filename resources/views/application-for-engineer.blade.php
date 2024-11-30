@@ -194,7 +194,7 @@
             <div class="row">
                 <div class="col-md-3 register-left">
                     <img src="//https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
-                    <h3>Welcome to engineering  Market Solution !</h3>
+                    <h3>Welcome to engineering Market Solution !</h3>
                     </br>
                     <p>Your career journey starts here! 🌟
 
