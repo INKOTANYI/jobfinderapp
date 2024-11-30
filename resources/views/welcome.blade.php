@@ -327,7 +327,7 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <form>
+                            <form action="{{ route('contact.store') }}" method="POST">
 
                                 @csrf
                                 <div class="row g-3">
