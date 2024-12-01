@@ -92,8 +92,6 @@ class EngineerController extends Controller
         return view('engineers.index', compact('engineers', 'departments', 'department_id'));
     }
 
-
-
     public function searchEngineers(Request $request)
 {
     $query = Engineer::query();
@@ -116,14 +114,20 @@ class EngineerController extends Controller
 }
 
 
+    public function showElectronicsEngineers()
+    {
+        // Retrieve engineers from Electronics department
+        $electronicsEngineers = Engineer::where('department', 'Electronics')->get();
 
+        // Count the number of engineers in the Electronics department
+        $count = $electronicsEngineers->count();
 
+        // Pass data to the Blade template
+        return view('electronics_engineers', [
+            'engineers' => $electronicsEngineers,
+            'count' => $count
+        ]);
     }
+}
 
-
-
-
-
-
-    //
 
