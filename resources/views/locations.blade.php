@@ -51,7 +51,7 @@
                     success: function(cities) {
                         $('#city').empty(); // Clear the city dropdown
                         $('#city').append(
-                        '<option value="">Select City</option>'); // Add default option
+                            '<option value="">Select City</option>'); // Add default option
 
                         // Populate the city dropdown with cities
                         $.each(cities, function(key, city) {

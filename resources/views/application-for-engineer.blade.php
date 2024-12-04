@@ -319,9 +319,7 @@
                                                 <select id="sector" name="sector_id"
                                                     class="form-control form-control-lg" required>
                                                     <option value="">Select a Sector</option>
-
                                                 </select>
-
                                             </div>
 
                                         </div>

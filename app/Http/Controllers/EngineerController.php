@@ -18,10 +18,12 @@ class EngineerController extends Controller
         $districts = District::all();
         $sectors = Sector::all();
         $departements = Departement::all();
+        // $count = Engineer::where('department', 'Electronics')->count();
         return view('application-for-engineer', compact(['provinces'
            ,'districts',
            'sectors',
-           'departements'
+           'departements',
+           
     ]));
     }
 
@@ -117,17 +119,20 @@ class EngineerController extends Controller
     public function showElectronicsEngineers()
     {
         // Retrieve engineers from Electronics department
-        $electronicsEngineers = Engineer::where('department', 'Electronics')->get();
+        $engineersCount = Engineer::where('department', 'Electronics')->get();
 
         // Count the number of engineers in the Electronics department
-        $count = $electronicsEngineers->count();
+        $count =  $engineersCount->count();
 
         // Pass data to the Blade template
-        return view('electronics_engineers', [
-            'engineers' => $electronicsEngineers,
+        return view('homepage', [
+            'engineers' =>  $engineersCount,
             'count' => $count
         ]);
     }
+
+    
+
 }
 
 

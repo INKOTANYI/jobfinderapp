@@ -28,25 +28,25 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::match(['get','post'],'/create-province', [ProvinceController::class, 'create'])->name('province.create');
-Route::match(['get','post'],'/store-province', [ProvinceController::class, 'store'])->name('province.store');
+Route::match(['get', 'post'], '/create-province', [ProvinceController::class, 'create'])->name('province.create');
+Route::match(['get', 'post'], '/store-province', [ProvinceController::class, 'store'])->name('province.store');
 
-Route::match(['get','post'],'/create-district', [DistrictController::class, 'create'])->name('create-district');
-Route::match(['get','post'],'/store-district', [DistrictController::class, 'store'])->name('store-district');
+Route::match(['get', 'post'], '/create-district', [DistrictController::class, 'create'])->name('create-district');
+Route::match(['get', 'post'], '/store-district', [DistrictController::class, 'store'])->name('store-district');
 
-Route::match(['get','post'],'/create-sector', [SectorController::class, 'create'])->name('create-sector');
-Route::match(['get','post'],'/store-sector', [SectorController::class, 'store'])->name('store-sector');
+Route::match(['get', 'post'], '/create-sector', [SectorController::class, 'create'])->name('create-sector');
+Route::match(['get', 'post'], '/store-sector', [SectorController::class, 'store'])->name('store-sector');
 
-Route::match(['get','post'],'/create-departement', [DepartementController::class, 'create'])->name('departement.create');
-Route::match(['get','post'],'/store-departement', [DepartementController::class, 'store'])->name('departement.store');
+Route::match(['get', 'post'], '/create-departement', [DepartementController::class, 'create'])->name('departement.create');
+Route::match(['get', 'post'], '/store-departement', [DepartementController::class, 'store'])->name('departement.store');
 
-Route::match(['get','post'],'/create-application', [EngineerController::class, 'index'])->name('create-application');
-Route::match(['get','post'],'/store-engineer', [EngineerController::class, 'store'])->name('store-engineer');
+Route::match(['get', 'post'], '/create-application', [EngineerController::class, 'index'])->name('create-application');
+Route::match(['get', 'post'], '/store-engineer', [EngineerController::class, 'store'])->name('store-engineer');
 
 Route::get('/locations', [LocationController::class, 'index']); // to load the main view
 Route::get('/get-cities/{countryId}', [LocationController::class, 'getCities']); // to get cities based on country
 
-Route::get('/get-districts/{provinceId}', [ProvinceController::class, 'getDistricts']); 
+Route::get('/get-districts/{provinceId}', [ProvinceController::class, 'getDistricts']);
 
 Route::get('/get-district/{province_id}', [ProvinceController::class, 'getDistrict'])->name('getDistricts');
 
@@ -58,17 +58,21 @@ Route::get('/engineers', [EngineerController::class, 'get_All'])->name('engineer
 
 Route::get('/engineers-by-departement', [EngineerController::class, 'getBy_Departement'])->name('engineers-by-departement');
 
+
+Route::get('/homepage', [EngineerController::class, 'showElectronicsEngineers'])->name('homepage');
+
+
 Route::get('/application', function () {
     return view('application');
 })->name('application');
 
+// Route::get('/homepage', function () {
+//     return view('homepage');
+// })->name('homepage');
 
-Route::get('home', function () {
-    return view('admin-application');
-})->name('home');
 
 Route::get('homepage', function () {
-    return view('welcome');
+    return view('homepage');
 })->name('homepage');
 
 Route::get('/search-engineers', [EngineerController::class, 'searchEngineers']);
@@ -76,4 +80,4 @@ Route::get('/search-engineers', [EngineerController::class, 'searchEngineers']);
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
