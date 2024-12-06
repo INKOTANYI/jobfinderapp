@@ -59,16 +59,12 @@ Route::get('/engineers', [EngineerController::class, 'get_All'])->name('engineer
 Route::get('/engineers-by-departement', [EngineerController::class, 'getBy_Departement'])->name('engineers-by-departement');
 
 
-Route::get('/homepage', [EngineerController::class, 'showElectronicsEngineers'])->name('homepage');
+Route::get('/sector-list', [SectorController::class, 'SearchSector'])->name('sector-list');
 
 
 Route::get('/application', function () {
     return view('application');
 })->name('application');
-
-// Route::get('/homepage', function () {
-//     return view('homepage');
-// })->name('homepage');
 
 
 Route::get('homepage', function () {

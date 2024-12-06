@@ -159,7 +159,7 @@
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
                             <h6 class="mb-3">Software Engineering</h6>
-                            <p>Total Engineers in Electronics:{{ $engineersCount }}</p>
+                            <p>Total Engineers in Electronics:{{ $sectorsCount }}</p>
 
                         </a>
                     </div>
