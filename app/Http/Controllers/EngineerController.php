@@ -6,9 +6,12 @@ use App\Models\District;
 use App\Models\Sector;
 use App\Models\Departement;
 use App\Models\Engineer;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use DataTables;
 
-use Illuminate\Http\Request;
+
+
 
 class EngineerController extends Controller
 {
@@ -95,7 +98,7 @@ class EngineerController extends Controller
         return view('engineers.index', compact('engineers', 'departments', 'department_id'));
     }
 
-    public function searchEngineers(Request $request)
+    public function searchEngineer(Request $request)
 {
     $query = Engineer::query();
 
@@ -145,7 +148,60 @@ class EngineerController extends Controller
         ->make(true);
 }
 
-    
+public function validateEngineer(Request $request)
+{
+    // Validate the email against the database for uniqueness
+    $validator = Validator::make($request->all(), [
+        'email' => 'required|email|unique:engineers,email',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(['errors' => $validator->errors()], 422);
+    }
+
+    return response()->json(['message' => 'Validation passed.'], 200);
+}
+
+public function searchEngineeris(Request $request)
+{
+    $query = Engineer::query();
+
+    if ($request->departement) {
+        $query->where('departement_id', $request->departement);
+    }
+    if ($request->district) {
+        $query->where('district_id', $request->district);
+    }
+    if ($request->sector) {
+        $query->where('sector_id', $request->sector);
+    }
+
+    $engineers = $query->get();
+
+    return response()->json($engineers);
+}
+
+
+public function searchEngineers(Request $request)
+{
+    $departementId = $request->departement_id;
+    $districtId = $request->district_id;
+    $sectorId = $request->sector_id;
+
+    // Perform the query to get the engineers data
+    $engineers = Engineer::where('departement_id', $departementId)
+                         ->where('district_id', $districtId)
+                         ->where('sector_id', $sectorId)
+                         ->get();
+
+    // Return the data as JSON, formatted for DataTable
+    return response()->json($engineers);
+}
+
+
+
+
+
 
 }
 

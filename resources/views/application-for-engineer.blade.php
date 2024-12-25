@@ -408,6 +408,48 @@
                 });
             </script>
 
+            <script>
+                < script >
+                    $(document).ready(function() {
+                        $('#email').on('blur', function() {
+                            let email = $(this).val();
+                            $('#emailError').text(''); // Clear previous errors
+
+                            // Send AJAX request for validation
+                            $.ajax({
+                                url: "{{ route('validate-engineer') }}",
+                                method: "POST",
+                                data: {
+                                    _token: "{{ csrf_token() }}",
+                                    email: email
+                                },
+                                success: function(response) {
+                                    console.log(response.message); // Validation passed
+                                },
+                                error: function(xhr) {
+                                    if (xhr.status === 422) {
+                                        let errors = xhr.responseJSON.errors;
+                                        if (errors.email) {
+                                            $('#emailError').text(errors.email[0]);
+                                        }
+                                    }
+                                }
+                            });
+                        });
+
+                        // Prevent form submission if validation errors exist
+                        $('#engineerForm').on('submit', function(e) {
+                            if ($('#emailError').text() !== '') {
+                                e.preventDefault();
+                                alert('Please fix validation errors before submitting the form.');
+                            }
+                        });
+                    }); <
+                />
+            </script>
+
+
+
         </div>
 
     </div>

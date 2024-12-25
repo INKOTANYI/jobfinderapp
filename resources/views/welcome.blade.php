@@ -17,6 +17,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
         rel="stylesheet">
 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- DataTable CSS -->
+    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -99,37 +106,111 @@
 
 
         <!-- Search Start -->
-        <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+        <!-- Search Start -->
+        {{-- <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
             <div class="container">
                 <div class="row g-2">
                     <div class="col-md-10">
                         <div class="row g-2">
                             <div class="col-md-4">
-                                <select class="form-select border-0">
-                                    <option selected>Departement</option>
-
+                                <select class="form-select border-0" id="departement">
+                                    <option value="">Select Departement</option>
+                                    <!-- Options dynamically loaded -->
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <select class="form-select border-0">
-                                    <option selected>District</option>
-
+                                <select class="form-select border-0" id="district">
+                                    <option value="">Select District</option>
+                                    <!-- Options dynamically loaded -->
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <select class="form-select border-0">
-                                    <option selected>Sector</option>
-
+                                <select class="form-select border-0" id="sector">
+                                    <option value="">Select Sector</option>
+                                    <!-- Options dynamically loaded -->
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-dark border-0 w-100">Search</button>
+                        <button class="btn btn-dark border-0 w-100" id="searchBtn">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+
+
+        <!-- Search Start -->
+        <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+            <div class="container">
+                <div class="row g-2">
+                    <div class="col-md-4">
+                        <select id="departement" class="form-select border-0">
+                            <option value="0" selected>Departement</option>
+                            <!-- Departement options will be loaded dynamically -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <select id="district" class="form-select border-0">
+                            <option value="0" selected>District</option>
+                            <!-- District options will be loaded dynamically -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <select id="sector" class="form-select border-0">
+                            <option value="0" selected>Sector</option>
+                            <!-- Sector options will be loaded dynamically -->
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button id="searchBtn" class="btn btn-dark border-0 w-100">Search</button>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Search End -->
+
+        <!-- Modal for displaying search results -->
+        <div id="resultsModal" class="modal fade" tabindex="-1" aria-labelledby="resultsModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="resultsModalLabel">Search Results</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table id="resultsTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Departement</th>
+                                    <th>District</th>
+                                    <th>Sector</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Results will be populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal End -->
+
+        <!-- Search End -->
+
+        <!-- Results -->
+        <div class="container mt-4">
+            <div id="results"></div>
+        </div>
+
         <!-- Search End -->
 
         <div class="container" id="AboutUs">
@@ -436,8 +517,214 @@
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- DataTable JS -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script>
+        document.getElementById('searchBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const departement = document.getElementById('departement').value;
+            const district = document.getElementById('district').value;
+            const sector = document.getElementById('sector').value;
+
+            // Perform AJAX Request
+            fetch("{{ route('search-engineers') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({
+                        departement,
+                        district,
+                        sector
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Update results
+                    const resultsDiv = document.getElementById('results');
+                    if (data.length > 0) {
+                        resultsDiv.innerHTML = data.map(engineer => `
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    <h5>${engineer.fname} ${engineer.lname}</h5>
+                                    <p>Email: ${engineer.email}</p>
+                                    <p>Phone: ${engineer.phone}</p>
+                                </div>
+                            </div>
+                        `).join('');
+                    } else {
+                        resultsDiv.innerHTML = '<p>No results found.</p>';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+
+
+    <script>
+        // Populate departement dropdown
+        fetch("{{ route('departements.list') }}")
+            .then(response => response.json())
+            .then(data => {
+                const departementSelect = document.getElementById('departement');
+                data.forEach(departement => {
+                    const option = document.createElement('option');
+                    option.value = departement.id;
+                    option.text = departement.name;
+                    departementSelect.add(option);
+                });
+            });
+
+        // Populate district dropdown on departement selection
+        document.getElementById('departement').addEventListener('change', function() {
+            const departementId = this.value;
+
+            fetch(`/get-districts/${departementId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const districtSelect = document.getElementById('district');
+                    districtSelect.innerHTML = '<option value="">Select District</option>'; // Reset
+                    data.forEach(district => {
+                        const option = document.createElement('option');
+                        option.value = district.id;
+                        option.text = district.name;
+                        districtSelect.add(option);
+                    });
+                });
+        });
+
+        // Populate sector dropdown on district selection
+        document.getElementById('district').addEventListener('change', function() {
+            const districtId = this.value;
+
+            fetch(`/get-sector/${districtId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const sectorSelect = document.getElementById('sector');
+                    sectorSelect.innerHTML = '<option value="">Select Sector</option>'; // Reset
+                    data.forEach(sector => {
+                        const option = document.createElement('option');
+                        option.value = sector.id;
+                        option.text = sector.name;
+                        sectorSelect.add(option);
+                    });
+                });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const districtSelect = document.getElementById('district');
+            const sectorSelect = document.getElementById('sector');
+
+            // Load districts when the page loads
+            fetch("{{ route('districts.list') }}")
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(district => {
+                        const option = document.createElement('option');
+                        option.value = district.id;
+                        option.text = district.name;
+                        districtSelect.add(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching districts:', error));
+
+            // Load sectors based on selected district
+            districtSelect.addEventListener('change', function() {
+                const districtId = this.value;
+
+                // Clear previous sector options
+                sectorSelect.innerHTML = '<option selected disabled>Select Sector</option>';
+
+                if (districtId) {
+                    fetch(`/sectors/${districtId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            data.forEach(sector => {
+                                const option = document.createElement('option');
+                                option.value = sector.id;
+                                option.text = sector.name;
+                                sectorSelect.add(option);
+                            });
+                        })
+                        .catch(error => console.error('Error fetching sectors:', error));
+                }
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+                    const searchButton = document.getElementById('searchBtn');
+                    const departementSelect = document.getElementById('departement');
+                    const districtSelect = document.getElementById('district');
+                    const sectorSelect = document.getElementById('sector');
+
+                    // Initialize DataTable
+                    const resultsTable = $('#resultsTable').DataTable();
+
+                    // Handle search button click
+                    searchButton.addEventListener('click', function() {
+                                const departementId = departementSelect.value;
+                                const districtId = districtSelect.value;
+                                const sectorId = sectorSelect.value;
+
+                                // Clear previous results
+                                resultsTable.clear().draw();
+
+                                // Send AJAX request to fetch filtered engineers
+                                $.ajax({
+                                    url: '{{ route('search-engineers') }}',
+                                    type: 'POST',
+                                    data: {
+                                        _token: '{{ csrf_token() }}', // Include CSRF token for POST requests
+                                        departement_id: departementId,
+                                        district_id: districtId,
+                                        sector_id: sectorId
+                                    },
+                                    success: function(data) {
+                                        // Populate DataTable with the fetched data
+                                        data.forEach(engineer => {
+                                            resultsTable.row.add([
+                                                engineer.id,
+                                                engineer.fname,
+                                                engineer.lname,
+                                                engineer.email,
+                                                engineer.phone,
+                                                engineer
+                                                .departement_id, // You can add actual departement name here
+                                                engineer.district_id, // Same for district
+                                                engineer.sector_id // Same for sector
+                                            ]).draw();
+                                        });
+
+                                        // Show modal after results are loaded
+                                        $('#resultsModal').modal('show');
+                                    },
+                                    error: function(err) {
+                                        console.error('Error fetching data:', err);
+                                    }
+                                });
+    </script>
+
+
+
+
+
 </body>
 
 </html>

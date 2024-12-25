@@ -35,6 +35,13 @@ class SectorController extends Controller
         return redirect()->route('create-sector')->with('success', 'district saved successfully!');
     }
 
+
+    public function getListByDistrict($districtId)
+    {
+        $sectors = Sector::where('district_id', $districtId)->get(['id', 'name']);
+        return response()->json($sectors);
+    }
+
     public function SearchSector(){
 
 

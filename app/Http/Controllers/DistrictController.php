@@ -43,4 +43,11 @@ class DistrictController extends Controller
     }
 
 
+    public function getList()
+    {
+        $districts = District::all(['id', 'name']);
+        return response()->json($districts);
+    }
+
+
 }

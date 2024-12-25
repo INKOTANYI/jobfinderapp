@@ -105,27 +105,27 @@
                     <div class="col-md-10">
                         <div class="row g-2">
                             <div class="col-md-4">
-                                <select class="form-select border-0">
-                                    <option selected>Departement</option>
-
+                                <select class="form-select border-0" id="departement">
+                                    <option value="">Select Departement</option>
+                                    <!-- Options dynamically loaded -->
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <select class="form-select border-0">
-                                    <option selected>District</option>
-
+                                <select class="form-select border-0" id="district">
+                                    <option value="">Select District</option>
+                                    <!-- Options dynamically loaded -->
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <select class="form-select border-0">
-                                    <option selected>Sector</option>
-
+                                <select class="form-select border-0" id="sector">
+                                    <option value="">Select Sector</option>
+                                    <!-- Options dynamically loaded -->
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-dark border-0 w-100">Search</button>
+                        <button class="btn btn-dark border-0 w-100" id="searchBtn">Search</button>
                     </div>
                 </div>
             </div>

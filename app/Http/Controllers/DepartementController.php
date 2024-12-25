@@ -12,6 +12,13 @@ class DepartementController extends Controller
         return view('create-departement');
     }
 
+
+    public function getList()
+    {
+        $departements = Departement::all(['id', 'name']);
+        return response()->json($departements);
+    }
+
     public function store(Request $request)
     {
         // Validate incoming request data

@@ -71,13 +71,23 @@ Route::get('homepage', function () {
     return view('homepage');
 })->name('homepage');
 
-Route::get('/search-engineers', [EngineerController::class, 'searchEngineers']);
+Route::get('/searching-engineers', [EngineerController::class, 'searchEngineers']);
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/engineers/data', [EngineerController::class, 'getEngineersData'])->name('engineers.data');
 
+Route::post('/validate-engineer', [EngineerController::class, 'validateEngineer'])->name('validate-engineer');
 
 
+// Route::get('/search-engineers', [EngineerController::class, 'searchEngineers'])->name('search-engineers');
+
+Route::post('/search-engineers', [EngineerController::class, 'searchEngineers'])->name('search-engineers');
+
+
+Route::get('/departements', [DepartementController::class, 'getList'])->name('departements.list');
+
+Route::get('/districts', [DistrictController::class, 'getList'])->name('districts.list');
+Route::get('/sectors/{districtId}', [SectorController::class, 'getListByDistrict'])->name('sectors.listByDistrict');
 
 require __DIR__ . '/auth.php';
