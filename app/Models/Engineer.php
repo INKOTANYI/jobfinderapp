@@ -9,7 +9,7 @@ class Engineer extends Model
 {
     use HasFactory;
 
-    // Mass assignable attributes
+    // Define the fillable fields for mass assignment
     protected $fillable = [
         'fname',
         'lname',
@@ -25,34 +25,34 @@ class Engineer extends Model
     ];
 
     /**
-     * Relationship with the Departement model
+     * Relationship with the Departement model.
      */
-    public function departement()
+    public function department()
     {
-        return $this->belongsTo(Departement::class);
+        return $this->belongsTo(Departement::class, 'departement_id');
     }
 
     /**
-     * Relationship with the Province model
+     * Relationship with the Province model.
      */
     public function province()
     {
-        return $this->belongsTo(Province::class);
+        return $this->belongsTo(Province::class, 'province_id');
     }
 
     /**
-     * Relationship with the District model
+     * Relationship with the District model.
      */
     public function district()
     {
-        return $this->belongsTo(District::class);
+        return $this->belongsTo(District::class, 'district_id');
     }
 
     /**
-     * Relationship with the Sector model
+     * Relationship with the Sector model.
      */
     public function sector()
     {
-        return $this->belongsTo(Sector::class);
+        return $this->belongsTo(Sector::class, 'sector_id');
     }
 }

@@ -6,6 +6,7 @@ use App\Models\District;
 use App\Models\Sector;
 use App\Models\Departement;
 use App\Models\Engineer;
+use DataTables;
 
 use Illuminate\Http\Request;
 
@@ -130,6 +131,19 @@ class EngineerController extends Controller
             'count' => $count
         ]);
     }
+
+    public function getEngineersData()
+{
+    $engineers = Engineer::with('department', 'district', 'sector')->select('engineers.*');
+    return DataTables::of($engineers)
+        ->editColumn('cv_path', function ($engineer) {
+            return $engineer->cv_path ? asset('storage/' . $engineer->cv_path) : null;
+        })
+        ->editColumn('degree_path', function ($engineer) {
+            return $engineer->degree_path ? asset('storage/' . $engineer->degree_path) : null;
+        })
+        ->make(true);
+}
 
     
 

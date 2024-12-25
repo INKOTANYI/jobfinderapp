@@ -1,4 +1,3 @@
-<!-- resources/views/engineers/index.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,77 +5,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registered Engineers</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
 </head>
 
 <body>
-
     <div class="container mt-5">
-        <h2 class="mb-4">All Engineers</h2>
-
-        @if ($engineers->isEmpty())
-            <div class="alert alert-warning">No engineers found.</div>
-        @else
-            <table class="table table-bordered table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Department</th>
-                        <th>Degree</th>
-                        <th>CV</th>
-                        <th>NIDA/Passport</th>
-                        <th>District</th>
-                        <th>Sector</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($engineers as $engineer)
-                        <tr>
-                            <td>{{ $engineer->fname }}</td>
-                            <td>{{ $engineer->lname }}</td>
-                            <td>{{ $engineer->email }}</td>
-                            <td>{{ $engineer->phone }}</td>
-                            <td>{{ $engineer->departement->name ?? 'N/A' }}</td>
-                            <td>
-                                @if ($engineer->cv_path)
-                                    <a href="{{ Storage::url($engineer->cv_path) }}" class="btn btn-primary btn-sm"
-                                        target="_blank">Download CV</a>
-                                @else
-                                    <span class="text-muted">No CV uploaded</span>
-                                @endif
-                            </td>
-                            <td>
-                                @if ($engineer->degree_path)
-                                    <a href="{{ Storage::url($engineer->degree_path) }}"
-                                        class="btn btn-secondary btn-sm" target="_blank">Download Degree</a>
-                                @else
-                                    <span class="text-muted">No Degree uploaded</span>
-                                @endif
-                            </td>
-                            <td>
-                                @if ($engineer->nida_path)
-                                    <a href="{{ Storage::url($engineer->nida_path) }}" class="btn btn-secondary btn-sm"
-                                        target="_blank">Download NIDA/Passport</a>
-                                @else
-                                    <span class="text-muted">No Passport uploaded</span>
-                                @endif
-                            </td>
-                            <td>{{ $engineer->district->name ?? 'N/A' }}</td>
-                            <td>{{ $engineer->sector->name ?? 'N/A' }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        @endif
-
+        <h2>All Engineers</h2>
+        <table id="engineersTable" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Department</th>
+                    <th>CV</th>
+                    <th>Degree</th>
+                    <th>District</th>
+                    <th>Sector</th>
+                </tr>
+            </thead>
+        </table>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- DataTables Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#engineersTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('engineers.data') }}", // Route for server-side data
+                columns: [{
+                        data: 'fname',
+                        name: 'fname'
+                    },
+                    {
+                        data: 'lname',
+                        name: 'lname'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'phone',
+                        name: 'phone'
+                    },
+                    {
+                        data: 'department.name',
+                        name: 'department.name',
+                        defaultContent: 'N/A'
+                    },
+                    {
+                        data: 'cv_path',
+                        name: 'cv_path',
+                        orderable: false,
+                        searchable: false,
+                        render: function(data) {
+                            return data ? `<a href="${data}" target="_blank">Download CV</a>` :
+                                'N/A';
+                        }
+                    },
+                    {
+                        data: 'degree_path',
+                        name: 'degree_path',
+                        orderable: false,
+                        searchable: false,
+                        render: function(data) {
+                            return data ? `<a href="${data}" target="_blank">Download Degree</a>` :
+                                'N/A';
+                        }
+                    },
+                    {
+                        data: 'district.name',
+                        name: 'district.name',
+                        defaultContent: 'N/A'
+                    },
+                    {
+                        data: 'sector.name',
+                        name: 'sector.name',
+                        defaultContent: 'N/A'
+                    }
+                ]
+            });
+        });
+    </script>
 </body>
 
 </html>

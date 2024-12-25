@@ -75,5 +75,9 @@ Route::get('/search-engineers', [EngineerController::class, 'searchEngineers']);
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+Route::get('/engineers/data', [EngineerController::class, 'getEngineersData'])->name('engineers.data');
+
+
+
 
 require __DIR__ . '/auth.php';
