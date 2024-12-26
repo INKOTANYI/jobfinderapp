@@ -107,16 +107,19 @@
                             <div class="col-md-4">
                                 <select class="form-select border-0" id="departement">
                                     <option value="">Select Departement</option>
+                                    <!-- Options dynamically loaded -->
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 <select class="form-select border-0" id="district">
                                     <option value="">Select District</option>
+                                    <!-- Options dynamically loaded -->
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 <select class="form-select border-0" id="sector">
                                     <option value="">Select Sector</option>
+                                    <!-- Options dynamically loaded -->
                                 </select>
                             </div>
                         </div>
@@ -127,36 +130,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="resultsModalLabel">Search Results</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table id="engineersTable" class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- DataTable will populate -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
         <!-- Search End -->
 
         <div class="container" id="AboutUs">
@@ -465,159 +438,6 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Populate Departement Dropdown
-            fetch("{{ route('departements.list') }}")
-                .then(response => response.json())
-                .then(data => {
-                    const departementSelect = document.getElementById('departement');
-                    data.forEach(departement => {
-                        const option = document.createElement('option');
-                        option.value = departement.id;
-                        option.text = departement.name;
-                        departementSelect.add(option);
-                    });
-                });
-
-            // Populate District Dropdown when Departement changes
-            document.getElementById('departement').addEventListener('change', function() {
-                const departementId = this.value;
-                if (departementId) { // Only make request if a Departement is selected
-                    fetch(`/get-districts/${departementId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const districtSelect = document.getElementById('district');
-                            districtSelect.innerHTML =
-                                '<option value="">Select District</option>'; // Reset options
-                            data.forEach(district => {
-                                const option = document.createElement('option');
-                                option.value = district.id;
-                                option.text = district.name;
-                                districtSelect.add(option);
-                            });
-                        })
-                        .catch(error => console.error('Error fetching districts:', error));
-                }
-            });
-
-            // Populate Sector Dropdown when District changes
-            document.getElementById('district').addEventListener('change', function() {
-                const districtId = this.value;
-                const sectorSelect = document.getElementById('sector');
-                sectorSelect.innerHTML = '<option value="">Select Sector</option>'; // Reset options
-                if (districtId) {
-                    fetch(`/get-sector/${districtId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            data.forEach(sector => {
-                                const option = document.createElement('option');
-                                option.value = sector.id;
-                                option.text = sector.name;
-                                sectorSelect.add(option);
-                            });
-                        })
-                        .catch(error => console.error('Error fetching sectors:', error));
-                }
-            });
-        });
-    </script> --}}
-
-    <script>
-        // Populate departement dropdown
-        fetch('/api/departements')
-            .then(response => response.json())
-            .then(data => {
-                const departementSelect = document.getElementById('departement');
-                data.forEach(departement => {
-                    departementSelect.innerHTML +=
-                        `<option value="${departement.id}">${departement.name}</option>`;
-                });
-            })
-            .catch(error => console.error('Error fetching departements:', error));
-
-        // Populate district based on selected departement
-        document.getElementById('departement').addEventListener('change', function() {
-            const departementId = this.value;
-            fetch(`/api/districts?departement_id=${departementId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const districtSelect = document.getElementById('district');
-                    districtSelect.innerHTML = '<option value="">Select District</option>';
-                    data.forEach(district => {
-                        districtSelect.innerHTML +=
-                            `<option value="${district.id}">${district.name}</option>`;
-                    });
-                })
-                .catch(error => console.error('Error fetching districts:', error));
-        });
-
-        // Populate sector based on selected district
-        document.getElementById('district').addEventListener('change', function() {
-            const districtId = this.value;
-            fetch(`/api/sectors?district_id=${districtId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const sectorSelect = document.getElementById('sector');
-                    sectorSelect.innerHTML = '<option value="">Select Sector</option>';
-                    data.forEach(sector => {
-                        sectorSelect.innerHTML +=
-                            `<option value="${sector.id}">${sector.name}</option>`;
-                    });
-                })
-                .catch(error => console.error('Error fetching sectors:', error));
-        });
-    </script>
-
-
-    <script>
-        document.getElementById('searchBtn').addEventListener('click', function() {
-            const departement = document.getElementById('departement').value;
-            const district = document.getElementById('district').value;
-            const sector = document.getElementById('sector').value;
-
-            fetch("{{ route('search-engineers') }}", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        departement_id: departement,
-                        district_id: district,
-                        sector_id: sector
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const tableBody = document.querySelector('#engineersTable tbody');
-                    tableBody.innerHTML = ''; // Clear previous results
-
-                    data.forEach(engineer => {
-                        const row = `
-                    <tr>
-                        <td>${engineer.fname}</td>
-                        <td>${engineer.lname}</td>
-                        <td>${engineer.email}</td>
-                        <td>${engineer.phone}</td>
-                    </tr>
-                `;
-                        tableBody.innerHTML += row;
-                    });
-
-                    // Show the modal with results
-                    new bootstrap.Modal(document.getElementById('resultsModal')).show();
-                })
-                .catch(error => console.error('Error:', error));
-        });
-    </script>
-
-
-
-
-
-
 </body>
 
 </html>
