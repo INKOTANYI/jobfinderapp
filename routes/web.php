@@ -8,11 +8,20 @@ use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\EngineerController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ContactController;
+use App\Models\Departement;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+
+    $softwareEngineersCount = Departement::where('name', 'Software Engineering')
+    ->withCount('engineers')
+    ->first()
+    ->engineers_count ?? 0;
+
+    return view('welcome', compact('softwareEngineersCount'));
+
+    
+})->name('welcome');
 
 
 

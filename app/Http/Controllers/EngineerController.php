@@ -199,8 +199,16 @@ public function searchEngineers(Request $request)
 }
 
 
+public function softwareengineers()
+{
+    // Count engineers in the Software Engineering department
+    $softwareEngineersCount = Departement::where('name', 'Software Engineering')
+        ->withCount('engineers')
+        ->first()
+        ->engineers_count ?? 0;
 
-
+    return view('welcome', compact('softwareEngineersCount'));
+}
 
 
 }
