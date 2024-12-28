@@ -30,6 +30,7 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -414,47 +415,35 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <form action="{{ route('contact.store') }}" method="POST">
+                            <form id="contactForm" method="POST">
                                 @csrf
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="name" name="name"
-                                                placeholder="Your Name" value="{{ old('name') }}">
+                                                placeholder="Your Name">
                                             <label for="name">Your Name</label>
-                                            @error('name')
-                                                <div style="color: red;">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
                                             <input type="email" class="form-control" id="email" name="email"
-                                                placeholder="Your Email" value="{{ old('email') }}">
+                                                placeholder="Your Email">
                                             <label for="email">Your Email</label>
-                                            @error('email')
-                                                <div style="color: red;">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="subject" name="subject"
-                                                placeholder="Subject" value="{{ old('subject') }}">
+                                                placeholder="Subject">
                                             <label for="subject">Subject</label>
-                                            @error('subject')
-                                                <div style="color: red;">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <textarea class="form-control" placeholder="Leave a message here" id="message" name="message"
-                                                style="height: 150px">{{ old('message') }}</textarea>
+                                                style="height: 150px"></textarea>
                                             <label for="message">Message</label>
-                                            @error('message')
-                                                <div style="color: red;">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -463,6 +452,8 @@
                                     </div>
                                 </div>
                             </form>
+                            <div id="successMessage" style="color: green; display: none;">Your message has been sent
+                                successfully!</div>
 
                             @if (session('success'))
                                 <div id="successMessage" style="color: green;">
@@ -510,21 +501,30 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="copyright">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">Engineering MarketSolution @2024</a>, All
-                            Right Reserved.
-
-                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                        </div>
-
-                    </div>
-                </div>
+            <div class="col-12 text-center mb-3">
+                &copy; <a class="border-bottom" href="#">Engineering MarketSolution @<?php echo date('Y'); ?></a>,
+                All Rights Reserved.
+                | Designed by <a class="text-primary" href="tel:0783163187">0783163187</a>
             </div>
+
         </div>
     </div>
+
+
+    <div id="toastMessage" class="toast align-items-center text-white bg-success border-0" role="alert"
+        aria-live="assertive" aria-atomic="true"
+        style="position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1055;">
+        <div class="d-flex">
+            <div class="toast-body">
+                Your message has been sent successfully!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close"></button>
+        </div>
+    </div>
+
+
+
+
     <!-- Footer End -->
 
 
@@ -546,13 +546,45 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const successMessage = document.getElementById('successMessage');
-            if (successMessage) {
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 3000); // 3 seconds
-            }
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+
+            // Form data
+            let formData = new FormData(this);
+
+            // Send AJAX request
+            fetch("{{ route('contact.store') }}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Show the toast
+                        let toastElement = document.getElementById('toastMessage');
+                        toastElement.style.display = "block";
+
+                        // Automatically hide the toast after 5 seconds
+                        setTimeout(() => {
+                            toastElement.style.display = "none";
+                        }, 5000);
+
+                        // Clear form fields
+                        document.getElementById('contactForm').reset();
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred. Please try again.");
+                });
+        });
+
+        // Add event listener to close the toast manually
+        document.querySelector('#toastMessage .btn-close').addEventListener('click', function() {
+            document.getElementById('toastMessage').style.display = "none";
         });
     </script>
 
