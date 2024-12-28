@@ -216,6 +216,93 @@
             </div>
         </div>
 
+        {{-- <div class="container-xxl py-5">
+            <div class="container">
+                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore Engineers By Department</h1>
+                <div class="row g-4">
+                    <!-- Dynamic Departments Loop -->
+                    @foreach ($departments as $department)
+                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <a class="cat-item rounded p-4" href="javascript:void(0)" class="department"
+                                data-id="{{ $department->id }}">
+                                <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
+                                <h6 class="mb-3">{{ $department->name }}</h6>
+                                <p>Total Engineers: <span
+                                        class="engineer-count">{{ $department->engineers_count }}</span></p>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div> --}}
+
+        <!-- Modal -->
+        <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="resultsModalLabel">Engineers in <span
+                                id="department-name"></span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table id="engineersTable" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Department</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                </tr>
+                            </thead>
+                            <tbody id="engineer-list">
+                                <!-- Data will populate here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // When a department is clicked
+            document.querySelectorAll('.cat-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const departmentId = this.getAttribute('data-id');
+                    const departmentName = this.querySelector('h6').innerText;
+                    document.getElementById('department-name').innerText = departmentName;
+
+                    // Fetch engineers for the clicked department
+                    fetch(`/departments/${departmentId}/engineers`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const tableBody = document.getElementById('engineer-list');
+                            tableBody.innerHTML = ''; // Clear existing data
+
+                            data.forEach(engineer => {
+                                const row = `
+                                    <tr>
+                                        <td>${engineer.name}</td>
+                                        <td>${engineer.email}</td>
+                                        <td>${engineer.department.name}</td>
+                                        <td>${engineer.address}</td>
+                                        <td>${engineer.phone}</td>
+                                    </tr>
+                                `;
+                                tableBody.innerHTML += row;
+                            });
+
+                            // Show the modal
+                            $('#resultsModal').modal('show');
+                        });
+                });
+            });
+        </script>
+
+
         <!-- Testimonial Start -->
         <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
             <div class="container">
@@ -425,7 +512,7 @@
 
 
     <!-- Back to Top -->
-    {{-- <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a> --}}
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
     <!-- JavaScript Libraries -->

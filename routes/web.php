@@ -85,9 +85,13 @@ Route::post('/validate-engineer', [EngineerController::class, 'validateEngineer'
 Route::post('/search-engineers', [EngineerController::class, 'searchEngineers'])->name('search-engineers');
 
 
-Route::get('/departements', [DepartementController::class, 'getList'])->name('departements.list');
+Route::get('/departements-list', [DepartementController::class, 'getList'])->name('departements.list');
 
 Route::get('/districts', [DistrictController::class, 'getList'])->name('districts.list');
 Route::get('/sectors/{districtId}', [SectorController::class, 'getListByDistrict'])->name('sectors.listByDistrict');
+
+
+Route::get('/departments', [DepartementController::class, 'index']);
+Route::get('/departments/{id}/engineers', [DepartementController::class, 'showEngineers']);
 
 require __DIR__ . '/auth.php';
