@@ -18,9 +18,55 @@ Route::get('/', function () {
     ->first()
     ->engineers_count ?? 0;
 
-    return view('welcome', compact('softwareEngineersCount'));
+    $landsarveilling = Departement::where('name', 'LandSurveilling Engineering')
+    ->withCount('engineers')
+    ->first()
+    ->engineers_count ?? 0;
 
-    
+    $Construction = Departement::where('name', 'Construction Engineering')
+        ->withCount('engineers')
+        ->first()
+        ->engineers_count ?? 0;
+
+
+        $Electronics = Departement::where('name', 'Electronics Engineering')
+        ->withCount('engineers')
+        ->first()
+        ->engineers_count ?? 0;
+
+        $Networking = Departement::where('name', 'Networking Engineering')
+        ->withCount('engineers')
+        ->first()
+        ->engineers_count ?? 0;
+
+        $Electrical = Departement::where('name', 'Electrical Engineering')
+        ->withCount('engineers')
+        ->first()
+        ->engineers_count ?? 0;
+
+        $Computer = Departement::where('name', 'Computer Engineering')
+        ->withCount('engineers')
+        ->first()
+        ->engineers_count ?? 0;
+
+        
+        $Civil = Departement::where('name', 'Civil Engineering')
+        ->withCount('engineers')
+        ->first()
+        ->engineers_count ?? 0;
+
+
+
+    return view('welcome', compact(
+        'softwareEngineersCount',
+        'landsarveilling',
+        'Construction',
+        'Electronics',
+         'Networking',
+        'Electrical',
+        'Computer',
+        'Civil'
+    ));
 })->name('welcome');
 
 

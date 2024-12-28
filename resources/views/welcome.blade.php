@@ -166,49 +166,49 @@
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-headset text-primary mb-4"></i>
                             <h6 class="mb-3">Civil Engineering</h6>
-                            <p>Total Engineers :</p>
+                            <p>Total Engineers: {{ $Civil }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
                             <h6 class="mb-3">Computer Engineering</h6>
-                            <p>Total Engineers :</p>
+                            <p>Total Engineers: {{ $Computer }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-tasks text-primary mb-4"></i>
                             <h6 class="mb-3">Electrical Engineering</h6>
-                            <p>Total Engineers :</p>
+                            <p>Total Engineers: {{ $Electrical }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-chart-line text-primary mb-4"></i>
                             <h6 class="mb-3">Networking Engineering</h6>
-                            <p>Total Engineers :</p>
+                            <p>Total Engineers: {{ $Networking }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-hands-helping text-primary mb-4"></i>
                             <h6 class="mb-3">Electronics Engeneering</h6>
-                            <p>Total Engineers :</p>
+                            <p>Total Engineers: {{ $Electronics }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-book-reader text-primary mb-4"></i>
-                            <h6 class="mb-3">Software Engineering</h6>
-                            <p>Total Engineers :</p>
+                            <h6 class="mb-3">Construction Engineering</h6>
+                            <p>Total Engineers: {{ $Construction }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-drafting-compass text-primary mb-4"></i>
-                            <h6 class="mb-3">LandSurveilling Engineering</h6>
-                            <p>Total Engineers :</p>
+                            <h6 class="mb-3">LandSurveilling </h6>
+                            <p>Total Engineers: {{ $landsarveilling }}</p>
                         </a>
                     </div>
                 </div>

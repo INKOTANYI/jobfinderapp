@@ -159,62 +159,159 @@
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
                             <h6 class="mb-3">Software Engineering</h6>
-                            <p>Total Engineers in Electronics:</p>
-
+                            <p>Total Engineers: {{ $softwareEngineersCount }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-headset text-primary mb-4"></i>
-                            <h6 class="mb-3">Mechanical Engineering</h6>
-                            <p class="mb-0">123 Engineers</p>
+                            <h6 class="mb-3">Civil Engineering</h6>
+                            <p>Total Engineers: {{ $Civil }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
-                            <h6 class="mb-3">Computer Science</h6>
-                            <p class="mb-0">123 Engineers</p>
+                            <h6 class="mb-3">Computer Engineering</h6>
+                            <p>Total Engineers: {{ $Computer }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-tasks text-primary mb-4"></i>
-                            <h6 class="mb-3">Networking Engineering</h6>
-                            <p class="mb-0">123 Engineers</p>
+                            <h6 class="mb-3">Electrical Engineering</h6>
+                            <p>Total Engineers: {{ $Electrical }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-chart-line text-primary mb-4"></i>
-                            <h6 class="mb-3">Electrical Engineering</h6>
-                            <p class="mb-0">123 Engineers</p>
+                            <h6 class="mb-3">Networking Engineering</h6>
+                            <p>Total Engineers: {{ $Networking }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-hands-helping text-primary mb-4"></i>
-                            <h6 class="mb-3">Mechanical Engineering</h6>
-                            <p class="mb-0">123 Engineers</p>
+                            <h6 class="mb-3">Electronics Engeneering</h6>
+                            <p>Total Engineers: {{ $Electronics }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-book-reader text-primary mb-4"></i>
-                            <h6 class="mb-3">Teaching & Education</h6>
-                            <p class="mb-0">123 Engineers</p>
+                            <h6 class="mb-3">Construction Engineering</h6>
+                            <p>Total Engineers: {{ $Construction }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-drafting-compass text-primary mb-4"></i>
-                            <h6 class="mb-3">Design & Creative</h6>
-                            <p class="mb-0">123 Engineers</p>
+                            <h6 class="mb-3">LandSurveilling Engineering</h6>
+                            <p>Total Engineers: {{ $landsarveilling }}</p>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+
+
+        {{-- <!-- Modal -->
+        <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="resultsModalLabel">Engineers in <span
+                                id="department-name"></span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table id="engineersTable" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Department</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                </tr>
+                            </thead>
+                            <tbody id="engineer-list">
+                                <!-- Data will populate here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+        <!-- Modal -->
+        <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="resultsModalLabel">Engineers in <span
+                                id="department-name"></span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table id="engineersTable" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Department</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                </tr>
+                            </thead>
+                            <tbody id="engineer-list">
+                                <!-- Data will populate here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // When a department is clicked
+            document.querySelectorAll('.cat-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const departmentId = this.getAttribute('data-id');
+                    const departmentName = this.querySelector('h6').innerText;
+                    document.getElementById('department-name').innerText = departmentName;
+
+                    // Fetch engineers for the clicked department
+                    fetch(`/departments/${departmentId}/engineers`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const tableBody = document.getElementById('engineer-list');
+                            tableBody.innerHTML = ''; // Clear existing data
+
+                            data.forEach(engineer => {
+                                const row = `
+                                    <tr>
+                                        <td>${engineer.name}</td>
+                                        <td>${engineer.email}</td>
+                                        <td>${engineer.department.name}</td>
+                                        <td>${engineer.address}</td>
+                                        <td>${engineer.phone}</td>
+                                    </tr>
+                                `;
+                                tableBody.innerHTML += row;
+                            });
+
+                            // Show the modal
+                            $('#resultsModal').modal('show');
+                        });
+                });
+            });
+        </script>
+
 
         <!-- Testimonial Start -->
         <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -425,7 +522,7 @@
 
 
     <!-- Back to Top -->
-    {{-- <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a> --}}
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
     <!-- JavaScript Libraries -->
