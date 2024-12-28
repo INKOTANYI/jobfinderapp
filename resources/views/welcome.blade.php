@@ -415,34 +415,46 @@
                                 </div>
                             @endif
                             <form action="{{ route('contact.store') }}" method="POST">
-
                                 @csrf
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="name"
-                                                placeholder="Your Name">
+                                            <input type="text" class="form-control" id="name" name="name"
+                                                placeholder="Your Name" value="{{ old('name') }}">
                                             <label for="name">Your Name</label>
+                                            @error('name')
+                                                <div style="color: red;">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="email" class="form-control" id="email"
-                                                placeholder="Your Email">
+                                            <input type="email" class="form-control" id="email" name="email"
+                                                placeholder="Your Email" value="{{ old('email') }}">
                                             <label for="email">Your Email</label>
+                                            @error('email')
+                                                <div style="color: red;">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="subject"
-                                                placeholder="Subject">
+                                            <input type="text" class="form-control" id="subject" name="subject"
+                                                placeholder="Subject" value="{{ old('subject') }}">
                                             <label for="subject">Subject</label>
+                                            @error('subject')
+                                                <div style="color: red;">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a message here" id="message" name="message"
+                                                style="height: 150px">{{ old('message') }}</textarea>
                                             <label for="message">Message</label>
+                                            @error('message')
+                                                <div style="color: red;">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -451,6 +463,12 @@
                                     </div>
                                 </div>
                             </form>
+
+                            @if (session('success'))
+                                <div id="successMessage" style="color: green;">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -524,6 +542,22 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const successMessage = document.getElementById('successMessage');
+            if (successMessage) {
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000); // 3 seconds
+            }
+        });
+    </script>
+
+
+
 </body>
 
 </html>

@@ -149,4 +149,7 @@ Route::get('/sectors/{districtId}', [SectorController::class, 'getListByDistrict
 Route::get('/departments', [DepartementController::class, 'index']);
 Route::get('/departments/{id}/engineers', [DepartementController::class, 'showEngineers']);
 
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+
 require __DIR__ . '/auth.php';
