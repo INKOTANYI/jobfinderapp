@@ -2,12 +2,17 @@
 
 @section('title', 'Registered Engineers')
 
+{{-- @section('content_header')
+    <h1>Registered Engineers</h1>
+@stop --}}
+
 @section('content')
     <div class="container mt-3">
         <h2>All Engineers</h2>
         <table id="engineersTable" class="display table table-striped" style="width:100%">
             <thead>
                 <tr>
+                    <th>No</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
@@ -26,6 +31,17 @@
 @section('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+
+    <style>
+        @media print {
+            a {
+                display: none !important;
+            }
+        }
+    </style>
+
+
+
 @stop
 
 @section('js')
@@ -40,6 +56,15 @@
                 serverSide: true,
                 ajax: "{{ route('engineers.data') }}", // Route for server-side data
                 columns: [{
+                        data: null,
+                        name: 'no',
+                        render: function(data, type, row, meta) {
+                            return meta.row + 1; // Serial number
+                        },
+                        searchable: false,
+                        orderable: false
+                    },
+                    {
                         data: 'fname',
                         name: 'fname'
                     },
@@ -65,7 +90,10 @@
                         name: 'cv_path',
                         orderable: false,
                         searchable: false,
-                        render: function(data) {
+                        render: function(data, type, row, meta) {
+                            if (type === 'print') {
+                                return 'N/A'; // Replace with 'N/A' for print
+                            }
                             return data ? `<a href="${data}" target="_blank">Download CV</a>` :
                                 'N/A';
                         }
@@ -75,7 +103,10 @@
                         name: 'degree_path',
                         orderable: false,
                         searchable: false,
-                        render: function(data) {
+                        render: function(data, type, row, meta) {
+                            if (type === 'print') {
+                                return 'N/A'; // Replace with 'N/A' for print
+                            }
                             return data ? `<a href="${data}" target="_blank">Download Degree</a>` :
                                 'N/A';
                         }
@@ -95,7 +126,13 @@
                 buttons: [{
                     extend: 'print',
                     text: 'Print Table', // Customize the button text
-                    className: 'btn btn-primary' // Optional: style the button
+                    className: 'btn btn-primary', // Optional: style the button
+                    customize: function(win) {
+                        // Remove all hyperlinks (download buttons) during print
+                        $(win.document.body).find('a').each(function() {
+                            $(this).replaceWith('N/A');
+                        });
+                    }
                 }]
             });
         });
