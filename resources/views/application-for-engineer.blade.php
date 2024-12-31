@@ -183,11 +183,23 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
-                    <a href="{{ route('homepage') }}" class="nav-item nav-link active">Back To Home</a>
+                    <a href="#Home" class="nav-item nav-link active">Home</a>
+                    {{-- <a href="#AboutUs" class="nav-item nav-link">About</a> --}}
+
                 </div>
+                {{-- <a href="#ContactUs" class="nav-item nav-link">Contact</a> --}}
                 <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
             </div>
 
+            {{-- <div class="nav-item dropdown">
+
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
+
+                    <a href="{{ route('create-application') }}"
+                        class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A
+                        Application <i class="fa fa-arrow-right ms-3"></i></a>
+                </div>
+            </div> --}}
         </nav>
 
         <div class="container register">
@@ -215,7 +227,7 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="home" role="tabpanel"
                                 aria-labelledby="home-tab">
-                                <h3 class="register-heading">Engineers Application Form</h3>
+                                <h3 class="register-heading">Apply to join our team of engineers!</h3>
                                 <br>
                                 <div class="row register-form">
                                     <div class="col-md-6">
