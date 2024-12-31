@@ -15,6 +15,7 @@ class Contact extends Model
         'email',
         'subject',
         'message',
+        'file_path', // Ensure file_path is listed here
     ];
 }
 

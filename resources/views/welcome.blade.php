@@ -409,59 +409,103 @@
                     </div>
                     <div class="col-md-6">
                         <div class="wow fadeInUp" data-wow-delay="0.5s">
-
-                            @if (session('success'))
-                                <div style="color: green;">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-                            <form id="contactForm" method="POST">
+                            <form id="contactForm" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row g-3">
+                                    <!-- Name Input -->
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="name" name="name"
-                                                placeholder="Your Name">
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                id="name" 
+                                                name="name" 
+                                                placeholder="Your Name" 
+                                                required>
                                             <label for="name">Your Name</label>
                                         </div>
                                     </div>
+                            
+                                    <!-- Email Input -->
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="email" class="form-control" id="email" name="email"
-                                                placeholder="Your Email">
+                                            <input 
+                                                type="email" 
+                                                class="form-control" 
+                                                id="email" 
+                                                name="email" 
+                                                placeholder="Your Email" 
+                                                required>
                                             <label for="email">Your Email</label>
                                         </div>
                                     </div>
+                            
+                                    <!-- Subject Input -->
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="subject" name="subject"
-                                                placeholder="Subject">
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                id="subject" 
+                                                name="subject" 
+                                                placeholder="Subject" 
+                                                required>
                                             <label for="subject">Subject</label>
                                         </div>
                                     </div>
+                            
+                                    <!-- Message Input -->
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a message here" id="message" name="message"
-                                                style="height: 150px"></textarea>
+                                            <textarea 
+                                                class="form-control" 
+                                                placeholder="Leave a message here" 
+                                                id="message" 
+                                                name="message" 
+                                                style="height: 150px" 
+                                                required></textarea>
                                             <label for="message">Message</label>
                                         </div>
                                     </div>
+                            
+                                    <!-- File Upload -->
                                     <div class="col-12">
-                                        <button class="btn btn-primary w-100 py-3" type="submit">Send
-                                            Message</button>
+                                        <div class="form-floating">
+                                            <input 
+                                                type="file" 
+                                                class="form-control" 
+                                                id="file" 
+                                                name="file" 
+                                                accept="image/*, .pdf">
+                                            <label for="file">Attach a File (Optional)</label>
+                                        </div>
+                                    </div>
+                            
+                                    <!-- Submit Button -->
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100 py-3" type="submit">
+                                            Send Message
+                                        </button>
                                     </div>
                                 </div>
                             </form>
-                            <div id="successMessage" style="color: green; display: none;">Your message has been sent
-                                successfully!</div>
-
-                            @if (session('success'))
-                                <div id="successMessage" style="color: green;">
-                                    {{ session('success') }}
+                            
+                            <!-- Success Message Popup -->
+                            <div class="toast align-items-center text-white bg-success border-0" role="alert"
+                                aria-live="assertive" aria-atomic="true"
+                                style="position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1055;"
+                                id="toastMessage">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                        Your message has been sent successfully!
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                                        data-bs-dismiss="toast" aria-label="Close"></button>
                                 </div>
-                            @endif
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -546,45 +590,35 @@
 
 
     <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
+        document.getElementById("contactForm").addEventListener("submit", async function(e) {
+            e.preventDefault(); // Prevent form submission
+            const formData = new FormData(this);
 
-            // Form data
-            let formData = new FormData(this);
-
-            // Send AJAX request
-            fetch("{{ route('contact.store') }}", {
+            try {
+                // Send the form data using Fetch API
+                const response = await fetch("{{ route('contact.store') }}", {
                     method: "POST",
+                    body: formData,
                     headers: {
                         "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
                     },
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Show the toast
-                        let toastElement = document.getElementById('toastMessage');
-                        toastElement.style.display = "block";
-
-                        // Automatically hide the toast after 5 seconds
-                        setTimeout(() => {
-                            toastElement.style.display = "none";
-                        }, 5000);
-
-                        // Clear form fields
-                        document.getElementById('contactForm').reset();
-                    }
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    alert("An error occurred. Please try again.");
                 });
-        });
 
-        // Add event listener to close the toast manually
-        document.querySelector('#toastMessage .btn-close').addEventListener('click', function() {
-            document.getElementById('toastMessage').style.display = "none";
+                if (response.ok) {
+                    // Show the success message
+                    const toast = document.getElementById("toastMessage");
+                    toast.style.display = "block";
+                    const bsToast = new bootstrap.Toast(toast);
+                    bsToast.show();
+
+                    // Reset the form
+                    document.getElementById("contactForm").reset();
+                } else {
+                    console.error("Failed to submit the form");
+                }
+            } catch (error) {
+                console.error("Error occurred:", error);
+            }
         });
     </script>
 

@@ -30,6 +30,7 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -207,7 +208,7 @@
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-drafting-compass text-primary mb-4"></i>
-                            <h6 class="mb-3">LandSurveilling Engineering</h6>
+                            <h6 class="mb-3">LandSurveilling </h6>
                             <p>Total Engineers: {{ $landsarveilling }}</p>
                         </a>
                     </div>
@@ -215,37 +216,26 @@
             </div>
         </div>
 
-
-        {{-- <!-- Modal -->
-        <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="resultsModalLabel">Engineers in <span
-                                id="department-name"></span></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table id="engineersTable" class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Department</th>
-                                    <th>Address</th>
-                                    <th>Phone</th>
-                                </tr>
-                            </thead>
-                            <tbody id="engineer-list">
-                                <!-- Data will populate here -->
-                            </tbody>
-                        </table>
-                    </div>
+        {{-- <div class="container-xxl py-5">
+            <div class="container">
+                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore Engineers By Department</h1>
+                <div class="row g-4">
+                    <!-- Dynamic Departments Loop -->
+                    @foreach ($departments as $department)
+                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <a class="cat-item rounded p-4" href="javascript:void(0)" class="department"
+                                data-id="{{ $department->id }}">
+                                <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
+                                <h6 class="mb-3">{{ $department->name }}</h6>
+                                <p>Total Engineers: <span
+                                        class="engineer-count">{{ $department->engineers_count }}</span></p>
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div> --}}
+
         <!-- Modal -->
         <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel"
             aria-hidden="true">
@@ -425,34 +415,34 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <form action="{{ route('contact.store') }}" method="POST">
-
+                            <form id="contactForm" method="POST">
                                 @csrf
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="name"
+                                            <input type="text" class="form-control" id="name" name="name"
                                                 placeholder="Your Name">
                                             <label for="name">Your Name</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="email" class="form-control" id="email"
+                                            <input type="email" class="form-control" id="email" name="email"
                                                 placeholder="Your Email">
                                             <label for="email">Your Email</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="subject"
+                                            <input type="text" class="form-control" id="subject" name="subject"
                                                 placeholder="Subject">
                                             <label for="subject">Subject</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a message here" id="message" name="message"
+                                                style="height: 150px"></textarea>
                                             <label for="message">Message</label>
                                         </div>
                                     </div>
@@ -462,6 +452,14 @@
                                     </div>
                                 </div>
                             </form>
+                            <div id="successMessage" style="color: green; display: none;">Your message has been sent
+                                successfully!</div>
+
+                            @if (session('success'))
+                                <div id="successMessage" style="color: green;">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -503,21 +501,30 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="copyright">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">Engineering MarketSolution @2024</a>, All
-                            Right Reserved.
-
-                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                        </div>
-
-                    </div>
-                </div>
+            <div class="col-12 text-center mb-3">
+                &copy; <a class="border-bottom" href="#">Engineering MarketSolution @<?php echo date('Y'); ?></a>,
+                All Rights Reserved.
+                | Designed by <a class="text-primary" href="tel:0783163187">0783163187</a>
             </div>
+
         </div>
     </div>
+
+
+    <div id="toastMessage" class="toast align-items-center text-white bg-success border-0" role="alert"
+        aria-live="assertive" aria-atomic="true"
+        style="position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1055;">
+        <div class="d-flex">
+            <div class="toast-body">
+                Your message has been sent successfully!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close"></button>
+        </div>
+    </div>
+
+
+
+
     <!-- Footer End -->
 
 
@@ -535,6 +542,54 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+
+            // Form data
+            let formData = new FormData(this);
+
+            // Send AJAX request
+            fetch("{{ route('contact.store') }}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Show the toast
+                        let toastElement = document.getElementById('toastMessage');
+                        toastElement.style.display = "block";
+
+                        // Automatically hide the toast after 5 seconds
+                        setTimeout(() => {
+                            toastElement.style.display = "none";
+                        }, 5000);
+
+                        // Clear form fields
+                        document.getElementById('contactForm').reset();
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred. Please try again.");
+                });
+        });
+
+        // Add event listener to close the toast manually
+        document.querySelector('#toastMessage .btn-close').addEventListener('click', function() {
+            document.getElementById('toastMessage').style.display = "none";
+        });
+    </script>
+
+
+
 </body>
 
 </html>

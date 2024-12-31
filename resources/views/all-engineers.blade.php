@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('adminlte::page')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registered Engineers</title>
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
-</head>
+@section('title', 'Registered Engineers')
 
-<body>
-    <div class="container mt-5">
+@section('content')
+    <div class="container mt-3">
         <h2>All Engineers</h2>
-        <table id="engineersTable" class="display" style="width:100%">
+        <table id="engineersTable" class="display table table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th>First Name</th>
@@ -29,12 +21,18 @@
             </thead>
         </table>
     </div>
+@stop
 
-    <!-- DataTables Scripts -->
+@section('css')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+@stop
+
+@section('js')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#engineersTable').DataTable({
@@ -92,10 +90,14 @@
                         name: 'sector.name',
                         defaultContent: 'N/A'
                     }
-                ]
+                ],
+                dom: 'Bfrtip', // Add the Buttons extension
+                buttons: [{
+                    extend: 'print',
+                    text: 'Print Table', // Customize the button text
+                    className: 'btn btn-primary' // Optional: style the button
+                }]
             });
         });
     </script>
-</body>
-
-</html>
+@stop
