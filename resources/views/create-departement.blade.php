@@ -181,7 +181,7 @@
                         </div>
 
                         <div class="tab-content">
-                            <button type="submit" class="btnRegister">Submit</button>
+                            <button type="submit" class="btnRegister">Save Departement</button>
                         </div>
                 </form>
             </div>
