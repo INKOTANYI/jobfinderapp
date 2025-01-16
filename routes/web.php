@@ -214,7 +214,7 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
 
 // This one (uncommented or redundant)
-Route::get('/contactes', [ContactController::class, 'index'])->name('contacts.index');
+
 
 
 require __DIR__ . '/auth.php';
