@@ -184,8 +184,6 @@ Route::get('homepage', function () {
 
 Route::get('/searching-engineers', [EngineerController::class, 'searchEngineers']);
 
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-
 Route::get('/engineers/data', [EngineerController::class, 'getEngineersData'])->name('engineers.data');
 
 Route::post('/validate-engineer', [EngineerController::class, 'validateEngineer'])->name('validate-engineer');
