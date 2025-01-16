@@ -205,13 +205,10 @@ Route::get('/sectors/{districtId}', [SectorController::class, 'getListByDistrict
 Route::get('/departments', [DepartementController::class, 'index']);
 Route::get('/departments/{id}/engineers', [DepartementController::class, 'showEngineers']);
 
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-
-// Route::get('/contactes', [ContactController::class, 'index'])->name('contacts.index');
-
+// Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // This route
-Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+// Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
 
 // This one (uncommented or redundant)
 
