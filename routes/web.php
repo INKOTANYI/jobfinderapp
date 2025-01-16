@@ -207,7 +207,7 @@ Route::get('/departments/{id}/engineers', [DepartementController::class, 'showEn
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-Route::get('/contactes', [ContactController::class, 'index'])->name('contacts.index');
+// Route::get('/contactes', [ContactController::class, 'index'])->name('contacts.index');
 
 
 Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
