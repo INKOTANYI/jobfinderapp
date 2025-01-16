@@ -210,10 +210,11 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 // Route::get('/contactes', [ContactController::class, 'index'])->name('contacts.index');
 
 
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+// This route
 Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
-Route::get('/contacts/download/{id}', [ContactController::class, 'downloadAttachment'])->name('contacts.download');
-Route::get('/contact-data', [ContactController::class, 'getContactData'])->name('contact.data');
+
+// This one (uncommented or redundant)
+Route::get('/contactes', [ContactController::class, 'index'])->name('contacts.index');
 
 
 require __DIR__ . '/auth.php';
