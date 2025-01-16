@@ -23,7 +23,7 @@ class EngineerController extends Controller
         $sectors = Sector::all();
         $departements = Departement::all();
         // $count = Engineer::where('department', 'Electronics')->count();
-        return view('application-for-engineer', compact(['provinces'
+        return view('application', compact(['provinces'
            ,'districts',
            'sectors',
            'departements',
