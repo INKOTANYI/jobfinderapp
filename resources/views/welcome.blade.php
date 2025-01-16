@@ -522,7 +522,7 @@
                 </div>
             </div>
             <div class="col-12 text-center mb-3">
-                &copy; <a class="border-bottom" href="#">Engineering MarketSolution @<?php echo date('Y'); ?></a>,
+                &copy; <a class="border-bottom" href="#">Ishakiro Job Solution  @<?php echo date('Y'); ?></a>,
                 All Rights Reserved.
                 | Designed by <a class="text-primary" href="tel:0783163187">0783163187</a>
             </div>
