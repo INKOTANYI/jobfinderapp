@@ -572,7 +572,7 @@
 
             try {
                 // Send the form data using Fetch API
-                const response = await fetch("{{ route('contact.store') }}", {
+                const response = await fetch("", {
                     method: "POST",
                     body: formData,
                     headers: {

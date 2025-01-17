@@ -387,7 +387,7 @@
                                         style="width: 45px; height: 45px;">
                                         <i class="fa fa-envelope-open text-primary"></i>
                                     </div>
-                                    <span>info@engineeringmarket solution.com</span>
+                                    <span>info@ishakirojobsolution.com</span>
                                 </div>
                             </div>
                             <div class="col-md-4 wow fadeIn" data-wow-delay="0.5s">
@@ -553,7 +553,7 @@
             let formData = new FormData(this);
 
             // Send AJAX request
-            fetch("{{ route('contact.store') }}", {
+            fetch("", {
                     method: "POST",
                     headers: {
                         "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
