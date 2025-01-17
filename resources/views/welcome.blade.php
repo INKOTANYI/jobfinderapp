@@ -78,17 +78,29 @@
         <!-- Carousel Start -->
         <div class="container-fluid p-0">
             <div class="owl-carousel header-carousel position-relative">
+                <!-- Carousel Item -->
                 <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="img/ai-generated-8806916_1280.jpg" alt="">
-                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
-                        style="background: rgba(43, 57, 64, .5);">
+                    <!-- Image -->
+                    <img class="img-fluid w-100" src="img/jopsa.png" alt="Find The Perfect Job" style="height: 90vh; object-fit: cover;">
+        
+                    <!-- Overlay -->
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-start"
+                        style="background: rgba(43, 57, 64, 0.6);">
                         <div class="container">
-                            <div class="row justify-content-start">
-                                <div class="col-10 col-lg-8">
-                                    <h1 class="display-3 text-white animated slideInDown mb-4">Find The Perfect Job That
-                                        You Deserved</h1>
-                                    <p class="fs-5 fw-medium text-white mb-4 pb-2">Join our community today, and take
-                                        the first step towards a brighter future!.</p>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <!-- Heading -->
+                                    <h1 class="display-3 fw-bold text-white mb-3 animated slideInDown">
+                                        Find The Perfect Job You Deserve
+                                    </h1>
+                                    <!-- Subtext -->
+                                    <p class="text-white mb-4 lead animated fadeInUp">
+                                        Explore thousands of opportunities tailored to your skills and ambitions.
+                                    </p>
+                                    <!-- Call-to-Action -->
+                                    <a href="#jobs" class="btn btn-primary py-2 px-4 animated zoomIn">
+                                        Browse Jobs
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -96,6 +108,8 @@
                 </div>
             </div>
         </div>
+        
+        
         <!-- Carousel End -->
 
 
@@ -140,11 +154,7 @@
 
                 <div class="container">
 
-                    <p>Engineering Market Solution is a digital platform designed to support the specific needs of
-                        engineering professionals, companies, and clients in areas such as project management,
-                        collaboration, job matching, and knowledge sharing. This type of web application can serve as a
-                        marketplace for engineers, a project management tool, a collaborative platform, or a technical
-                        resource hub.</p>
+                    <p>Ishakiro Job Solution is an advanced digital platform designed to meet the diverse needs of professionals, companies, and clients across various departments of education. It provides a comprehensive set of tools to support project management, enhance collaboration, facilitate job matching, and promote knowledge sharing. As a marketplace, project management hub, collaborative platform, and technical resource center, Ishakiro Job Solution connects professionals with the right opportunities, resources, and networks to foster growth and success in the educational sector.</p>
 
                 </div>
             </div>
@@ -154,41 +164,41 @@
         <!-- Category Start -->
         <div class="container-xxl py-5">
             <div class="container">
-                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore Engineers By Departement</h1>
+                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore Applicant By Departement</h1>
                 <div class="row g-4">
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
                             <h6 class="mb-3">Software Engineering</h6>
-                            <p>Total Engineers: {{ $softwareEngineersCount }}</p>
+                            <p>Total applicants: {{ $softwareEngineersCount }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-headset text-primary mb-4"></i>
                             <h6 class="mb-3">Civil Engineering</h6>
-                            <p>Total Engineers: {{ $Civil }}</p>
+                            <p>Total applicants: {{ $Civil }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
                             <h6 class="mb-3">Computer Engineering</h6>
-                            <p>Total Engineers: {{ $Computer }}</p>
+                            <p>Total applicants: {{ $Computer }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-tasks text-primary mb-4"></i>
                             <h6 class="mb-3">Electrical Engineering</h6>
-                            <p>Total Engineers: {{ $Electrical }}</p>
+                            <p>Total applicants: {{ $Electrical }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-chart-line text-primary mb-4"></i>
                             <h6 class="mb-3">Networking Engineering</h6>
-                            <p>Total Engineers: {{ $Networking }}</p>
+                            <p>Total applicants: {{ $Networking }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -202,14 +212,14 @@
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-book-reader text-primary mb-4"></i>
                             <h6 class="mb-3">Construction Engineering</h6>
-                            <p>Total Engineers: {{ $Construction }}</p>
+                            <p>Total applicants: {{ $Construction }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-drafting-compass text-primary mb-4"></i>
                             <h6 class="mb-3">LandSurveilling </h6>
-                            <p>Total Engineers: {{ $landsarveilling }}</p>
+                            <p>Total applicants: {{ $landsarveilling }}</p>
                         </a>
                     </div>
                 </div>

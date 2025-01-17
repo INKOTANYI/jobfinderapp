@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Engineering Market Solution</title>
+    <title>Ishakiro Job Solution </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -48,7 +48,7 @@
         <!-- Navbar Start -->
         <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
             <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
-                <h1 class="m-0 text-primary">Engineering Solution</h1>
+                <h1 class="m-0 text-primary">Ishakiro Job Solution</h1>
             </a>
             <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
                 data-bs-target="#navbarCollapse">
@@ -79,7 +79,7 @@
         <div class="container-fluid p-0">
             <div class="owl-carousel header-carousel position-relative">
                 <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="img/ai-generated-8806916_1280.jpg" alt="">
+                    <img class="img-fluid" src="imge/homeapp.jpg" alt="">
                     <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
                         style="background: rgba(43, 57, 64, .5);">
                         <div class="container">
@@ -87,8 +87,7 @@
                                 <div class="col-10 col-lg-8">
                                     <h1 class="display-3 text-white animated slideInDown mb-4">Find The Perfect Job That
                                         You Deserved</h1>
-                                    <p class="fs-5 fw-medium text-white mb-4 pb-2">Join our community today, and take
-                                        the first step towards a brighter future!.</p>
+                        
                                 </div>
                             </div>
                         </div>
