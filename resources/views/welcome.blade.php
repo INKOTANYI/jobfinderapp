@@ -47,33 +47,39 @@
 
         <!-- Navbar Start -->
         <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+            <!-- Logo and Brand Name -->
             <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
-                <h1 class="m-0 text-primary">Ishakiro Job Solution</h1>
+                <img src="img/ishakiro.jpg" alt="Ishakiro Job Solution Logo" class="img-fluid" style="height: 40px;">
+                
             </a>
-            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
-                data-bs-target="#navbarCollapse">
+        
+            <!-- Toggler for mobile view -->
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
+        
+            <!-- Navbar links -->
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
                     <a href="#Home" class="nav-item nav-link active">Home</a>
                     <a href="#AboutUs" class="nav-item nav-link">About</a>
-
+                    <a href="#ContactUs" class="nav-item nav-link">Contact</a>
+                    <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
+                    
+                    <!-- Post Application Button (Visible in mobile toggle) -->
+                    <a href="{{ route('create-application') }}" class="nav-item nav-link d-lg-none">
+                        Post A Application
+                    </a>
                 </div>
-                <a href="#ContactUs" class="nav-item nav-link">Contact</a>
-                <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
-            </div>
-
-            <div class="nav-item dropdown">
-
-                <div class="navbar-nav ms-auto p-4 p-lg-0">
-
-                    <a href="{{ route('create-application') }}"
-                        class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A
-                        Application <i class="fa fa-arrow-right ms-3"></i></a>
-                </div>
+                
+                <!-- Post Application Button (Visible only on larger screens) -->
+                <a href="{{ route('create-application') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">
+                    Post A Application <i class="fa fa-arrow-right ms-3"></i>
+                </a>
             </div>
         </nav>
+        
+        
         <!-- Navbar End -->
         <!-- Carousel Start -->
         <div class="container-fluid p-0">

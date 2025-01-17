@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Ishakiro Job Solution </title>
+    <title>Ishakiro job  Solution</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -47,47 +47,66 @@
 
         <!-- Navbar Start -->
         <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+            <!-- Logo and Brand Name -->
             <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
-                <h1 class="m-0 text-primary">Ishakiro Job Solution</h1>
+                <img src="img/ishakiro.jpg" alt="Ishakiro Job Solution Logo" class="img-fluid" style="height: 40px;">
+                
             </a>
-            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
-                data-bs-target="#navbarCollapse">
+        
+            <!-- Toggler for mobile view -->
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
+        
+            <!-- Navbar links -->
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
                     <a href="#Home" class="nav-item nav-link active">Home</a>
                     <a href="#AboutUs" class="nav-item nav-link">About</a>
-
+                    <a href="#ContactUs" class="nav-item nav-link">Contact</a>
+                    <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
+                    
+                    <!-- Post Application Button (Visible in mobile toggle) -->
+                    <a href="{{ route('create-application') }}" class="nav-item nav-link d-lg-none">
+                        Post A Application
+                    </a>
                 </div>
-                <a href="#ContactUs" class="nav-item nav-link">Contact</a>
-                <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
-            </div>
-
-            <div class="nav-item dropdown">
-
-                <div class="navbar-nav ms-auto p-4 p-lg-0">
-
-                    <a href="{{ route('create-application') }}"
-                        class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A
-                        Application <i class="fa fa-arrow-right ms-3"></i></a>
-                </div>
+                
+                <!-- Post Application Button (Visible only on larger screens) -->
+                <a href="{{ route('create-application') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">
+                    Post A Application <i class="fa fa-arrow-right ms-3"></i>
+                </a>
             </div>
         </nav>
+        
+        
         <!-- Navbar End -->
         <!-- Carousel Start -->
         <div class="container-fluid p-0">
             <div class="owl-carousel header-carousel position-relative">
+                <!-- Carousel Item -->
                 <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="imge/homeapp.jpg" alt="">
-                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
-                        style="background: rgba(43, 57, 64, .5);">
+                    <!-- Image -->
+                    <img class="img-fluid w-100" src="img/jopsa.png" alt="Find The Perfect Job" style="height: 90vh; object-fit: cover;">
+        
+                    <!-- Overlay -->
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-start"
+                        style="background: rgba(43, 57, 64, 0.6);">
                         <div class="container">
-                            <div class="row justify-content-start">
-                                <div class="col-10 col-lg-8">
-                                    <h1 class="display-3 text-white animated slideInDown mb-4">Find The Perfect Job That
-                                        You Deserved</h1>
-                        
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <!-- Heading -->
+                                    <h1 class="display-3 fw-bold text-white mb-3 animated slideInDown">
+                                        Find The Perfect Job You Deserve
+                                    </h1>
+                                    <!-- Subtext -->
+                                    <p class="text-white mb-4 lead animated fadeInUp">
+                                        Explore thousands of opportunities tailored to your skills and ambitions.
+                                    </p>
+                                    <!-- Call-to-Action -->
+                                    <a href="#jobs" class="btn btn-primary py-2 px-4 animated zoomIn">
+                                        Browse Jobs
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -95,6 +114,8 @@
                 </div>
             </div>
         </div>
+        
+        
         <!-- Carousel End -->
 
 
@@ -139,11 +160,7 @@
 
                 <div class="container">
 
-                    <p>Engineering Market Solution is a digital platform designed to support the specific needs of
-                        engineering professionals, companies, and clients in areas such as project management,
-                        collaboration, job matching, and knowledge sharing. This type of web application can serve as a
-                        marketplace for engineers, a project management tool, a collaborative platform, or a technical
-                        resource hub.</p>
+                    <p>Ishakiro Job Solution is an advanced digital platform designed to meet the diverse needs of professionals, companies, and clients across various departments of education. It provides a comprehensive set of tools to support project management, enhance collaboration, facilitate job matching, and promote knowledge sharing. As a marketplace, project management hub, collaborative platform, and technical resource center, Ishakiro Job Solution connects professionals with the right opportunities, resources, and networks to foster growth and success in the educational sector.</p>
 
                 </div>
             </div>
@@ -153,41 +170,41 @@
         <!-- Category Start -->
         <div class="container-xxl py-5">
             <div class="container">
-                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore Engineers By Departement</h1>
+                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore Applicant By Departement</h1>
                 <div class="row g-4">
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
                             <h6 class="mb-3">Software Engineering</h6>
-                            <p>Total Engineers: {{ $softwareEngineersCount }}</p>
+                            <p>Total applicants: {{ $softwareEngineersCount }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-headset text-primary mb-4"></i>
                             <h6 class="mb-3">Civil Engineering</h6>
-                            <p>Total Engineers: {{ $Civil }}</p>
+                            <p>Total applicants: {{ $Civil }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
                             <h6 class="mb-3">Computer Engineering</h6>
-                            <p>Total Engineers: {{ $Computer }}</p>
+                            <p>Total applicants: {{ $Computer }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-tasks text-primary mb-4"></i>
                             <h6 class="mb-3">Electrical Engineering</h6>
-                            <p>Total Engineers: {{ $Electrical }}</p>
+                            <p>Total applicants: {{ $Electrical }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-chart-line text-primary mb-4"></i>
                             <h6 class="mb-3">Networking Engineering</h6>
-                            <p>Total Engineers: {{ $Networking }}</p>
+                            <p>Total applicants: {{ $Networking }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -201,14 +218,14 @@
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-book-reader text-primary mb-4"></i>
                             <h6 class="mb-3">Construction Engineering</h6>
-                            <p>Total Engineers: {{ $Construction }}</p>
+                            <p>Total applicants: {{ $Construction }}</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-drafting-compass text-primary mb-4"></i>
                             <h6 class="mb-3">LandSurveilling </h6>
-                            <p>Total Engineers: {{ $landsarveilling }}</p>
+                            <p>Total applicants: {{ $landsarveilling }}</p>
                         </a>
                     </div>
                 </div>
@@ -386,7 +403,7 @@
                                         style="width: 45px; height: 45px;">
                                         <i class="fa fa-envelope-open text-primary"></i>
                                     </div>
-                                    <span>info@ishakirojobsolution.com</span>
+                                    <span>info@engineeringmarket solution.com</span>
                                 </div>
                             </div>
                             <div class="col-md-4 wow fadeIn" data-wow-delay="0.5s">
@@ -408,59 +425,79 @@
                     </div>
                     <div class="col-md-6">
                         <div class="wow fadeInUp" data-wow-delay="0.5s">
-
-                            @if (session('success'))
-                                <div style="color: green;">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-                            <form id="contactForm" method="POST">
+                            <form id="contactForm" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row g-3">
+                                    <!-- Name Input -->
                                     <div class="col-md-6">
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="name" name="name"
-                                                placeholder="Your Name">
+                                                placeholder="Your Name" required>
                                             <label for="name">Your Name</label>
                                         </div>
                                     </div>
+
+                                    <!-- Email Input -->
                                     <div class="col-md-6">
                                         <div class="form-floating">
                                             <input type="email" class="form-control" id="email" name="email"
-                                                placeholder="Your Email">
+                                                placeholder="Your Email" required>
                                             <label for="email">Your Email</label>
                                         </div>
                                     </div>
+
+                                    <!-- Subject Input -->
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="subject" name="subject"
-                                                placeholder="Subject">
+                                                placeholder="Subject" required>
                                             <label for="subject">Subject</label>
                                         </div>
                                     </div>
+
+                                    <!-- Message Input -->
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <textarea class="form-control" placeholder="Leave a message here" id="message" name="message"
-                                                style="height: 150px"></textarea>
+                                                style="height: 150px" required></textarea>
                                             <label for="message">Message</label>
                                         </div>
                                     </div>
+
+                                    <!-- File Upload -->
                                     <div class="col-12">
-                                        <button class="btn btn-primary w-100 py-3" type="submit">Send
-                                            Message</button>
+                                        <div class="form-floating">
+                                            <input type="file" class="form-control" id="file" name="file"
+                                                accept="image/*, .pdf">
+                                            <label for="file">Attach a File (Optional)</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100 py-3" type="submit">
+                                            Send Message
+                                        </button>
                                     </div>
                                 </div>
                             </form>
-                            <div id="successMessage" style="color: green; display: none;">Your message has been sent
-                                successfully!</div>
 
-                            @if (session('success'))
-                                <div id="successMessage" style="color: green;">
-                                    {{ session('success') }}
+                            <!-- Success Message Popup -->
+                            <div class="toast align-items-center text-white bg-success border-0" role="alert"
+                                aria-live="assertive" aria-atomic="true"
+                                style="position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1055;"
+                                id="toastMessage">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                        Your message has been sent successfully!
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                                        data-bs-dismiss="toast" aria-label="Close"></button>
                                 </div>
-                            @endif
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -501,7 +538,7 @@
                 </div>
             </div>
             <div class="col-12 text-center mb-3">
-                &copy; <a class="border-bottom" href="#">Engineering MarketSolution @<?php echo date('Y'); ?></a>,
+                &copy; <a class="border-bottom" href="#">Ishakiro Job Solution  @<?php echo date('Y'); ?></a>,
                 All Rights Reserved.
                 | Designed by <a class="text-primary" href="tel:0783163187">0783163187</a>
             </div>
@@ -545,45 +582,35 @@
 
 
     <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
+        document.getElementById("contactForm").addEventListener("submit", async function(e) {
+            e.preventDefault(); // Prevent form submission
+            const formData = new FormData(this);
 
-            // Form data
-            let formData = new FormData(this);
-
-            // Send AJAX request
-            fetch("", {
+            try {
+                // Send the form data using Fetch API
+                const response = await fetch("", {
                     method: "POST",
+                    body: formData,
                     headers: {
                         "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
                     },
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Show the toast
-                        let toastElement = document.getElementById('toastMessage');
-                        toastElement.style.display = "block";
-
-                        // Automatically hide the toast after 5 seconds
-                        setTimeout(() => {
-                            toastElement.style.display = "none";
-                        }, 5000);
-
-                        // Clear form fields
-                        document.getElementById('contactForm').reset();
-                    }
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    alert("An error occurred. Please try again.");
                 });
-        });
 
-        // Add event listener to close the toast manually
-        document.querySelector('#toastMessage .btn-close').addEventListener('click', function() {
-            document.getElementById('toastMessage').style.display = "none";
+                if (response.ok) {
+                    // Show the success message
+                    const toast = document.getElementById("toastMessage");
+                    toast.style.display = "block";
+                    const bsToast = new bootstrap.Toast(toast);
+                    bsToast.show();
+
+                    // Reset the form
+                    document.getElementById("contactForm").reset();
+                } else {
+                    console.error("Failed to submit the form");
+                }
+            } catch (error) {
+                console.error("Error occurred:", error);
+            }
         });
     </script>
 
