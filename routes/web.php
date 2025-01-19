@@ -95,8 +95,13 @@ Route::match(['get', 'post'], '/store-sector', [SectorController::class, 'store'
 Route::match(['get', 'post'], '/create-departement', [DepartementController::class, 'create'])->name('departement.create');
 Route::match(['get', 'post'], '/store-departement', [DepartementController::class, 'store'])->name('departement.store');
 
-Route::match(['get', 'post'], '/create-application', [EngineerController::class, 'index'])->name('create-application');
-Route::match(['get', 'post'], '/store-engineer', [EngineerController::class, 'store'])->name('store-engineer');
+// Route::match(['get', 'post'], '/create-application', [EngineerController::class, 'index'])->name('create-application');
+// Route::match(['get', 'post'], '/store-engineer', [EngineerController::class, 'store'])->name('store-engineer');
+
+
+Route::get('/create-application', [EngineerController::class, 'index'])->name('create-application');
+Route::post('/store-engineer', [EngineerController::class, 'store'])->name('store-engineer');
+
 
 Route::get('/locations', [LocationController::class, 'index']); // to load the main view
 Route::get('/get-cities/{countryId}', [LocationController::class, 'getCities']); // to get cities based on country
@@ -123,64 +128,40 @@ Route::get('/application', function () {
 
 
 Route::get('homepage', function () {
+    $departments = Departement::whereIn('name', [
+        'Software Engineering',
+        'LandSurveilling Engineering',
+        'Construction Engineering',
+        'Electronics Engineering',
+        'Networking Engineering',
+        'Electrical Engineering',
+        'Computer Engineering',
+        'Civil Engineering',
+    ])->withCount('engineers')->get();
 
-    $softwareEngineersCount = Departement::where('name', 'Software Engineering')
-    ->withCount('engineers')
-    ->first()
-    ->engineers_count ?? 0;
+    $departmentCounts = $departments->pluck('engineers_count', 'name');
 
-    $landsarveilling = Departement::where('name', 'LandSurveilling Engineering')
-    ->withCount('engineers')
-    ->first()
-    ->engineers_count ?? 0;
+    $softwareEngineersCount = $departmentCounts['Software Engineering'] ?? 0;
+    $landsarveilling = $departmentCounts['LandSurveilling Engineering'] ?? 0;
+    $Construction = $departmentCounts['Construction Engineering'] ?? 0;
+    $Electronics = $departmentCounts['Electronics Engineering'] ?? 0;
+    $Networking = $departmentCounts['Networking Engineering'] ?? 0;
+    $Electrical = $departmentCounts['Electrical Engineering'] ?? 0;
+    $Computer = $departmentCounts['Computer Engineering'] ?? 0;
+    $Civil = $departmentCounts['Civil Engineering'] ?? 0;
 
-    $Construction = Departement::where('name', 'Construction Engineering')
-        ->withCount('engineers')
-        ->first()
-        ->engineers_count ?? 0;
-
-
-        $Electronics = Departement::where('name', 'Electronics Engineering')
-        ->withCount('engineers')
-        ->first()
-        ->engineers_count ?? 0;
-
-        $Networking = Departement::where('name', 'Networking Engineering')
-        ->withCount('engineers')
-        ->first()
-        ->engineers_count ?? 0;
-
-        $Electrical = Departement::where('name', 'Electrical Engineering')
-        ->withCount('engineers')
-        ->first()
-        ->engineers_count ?? 0;
-
-        $Computer = Departement::where('name', 'Computer Engineering')
-        ->withCount('engineers')
-        ->first()
-        ->engineers_count ?? 0;
-
-        
-        $Civil = Departement::where('name', 'Civil Engineering')
-        ->withCount('engineers')
-        ->first()
-        ->engineers_count ?? 0;
-
-
-
-
-
-        return view('homepage', compact(
-            'softwareEngineersCount',
-            'landsarveilling',
-            'Construction',
-            'Electronics',
-             'Networking',
-            'Electrical',
-            'Computer',
-            'Civil'
-        ));
+    return view('homepage', compact(
+        'softwareEngineersCount',
+        'landsarveilling',
+        'Construction',
+        'Electronics',
+        'Networking',
+        'Electrical',
+        'Computer',
+        'Civil'
+    ))->with('success', session('success'));
 })->name('homepage');
+
 
 Route::get('/searching-engineers', [EngineerController::class, 'searchEngineers']);
 
@@ -202,5 +183,11 @@ Route::get('/sectors/{districtId}', [SectorController::class, 'getListByDistrict
 
 Route::get('/departments', [DepartementController::class, 'index']);
 Route::get('/departments/{id}/engineers', [DepartementController::class, 'showEngineers']);
+
+Route::post('/check-phone', [EngineerController::class, 'checkPhone'])->name('check-phone');
+Route::post('/check-email', [EngineerController::class, 'checkEmail'])->name('check-email');
+
+
+
 
 require __DIR__ . '/auth.php';

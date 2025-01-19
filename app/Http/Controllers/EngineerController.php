@@ -33,16 +33,19 @@ class EngineerController extends Controller
 
     public function store(Request $request)
     {
-        // Validate the request
         $request->validate([
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
-            'email' => 'required|string|max:20',
-            'phone' => 'required|string|max:20',
+            'email' => 'required|email|unique:engineers,email',
+            'phone' => [
+                'required',
+                'regex:/^07(8|2|3)\d{7}$/', // Rwandan phone number format
+                'unique:engineers,phone',
+            ],
             'departement_id' => 'required|exists:departements,id',
-            'cv_path' => 'required|mimes:pdf|max:5120', // Max 5MB
-            'degree_path' => 'required|mimes:pdf|max:5120', // Max 5MB
-            'nida_path' => 'required|mimes:pdf|max:5120', // Max 5MB
+            'cv_path' => 'required|mimes:pdf|max:5120', // Max file size 5MB
+            'degree_path' => 'required|mimes:pdf|max:5120', // Max file size 5MB
+            'nida_path' => 'required|mimes:pdf|max:5120', // Max file size 5MB
             'province_id' => 'required|exists:provinces,id',
             'district_id' => 'required|exists:districts,id',
             'sector_id' => 'required|exists:sectors,id',
@@ -69,6 +72,8 @@ class EngineerController extends Controller
 
         ]);
         
+
+        // return redirect()->route('homepage')->with('success', 'Engineer information and files saved successfully!');
 
         return redirect()->route('homepage')->with('success', 'Engineer information and files saved successfully!');
     }
@@ -209,8 +214,60 @@ public function softwareengineers()
 
     return view('welcome', compact('softwareEngineersCount'));
 }
+public function checkPhoneNumber(Request $request)
+{
+    $phone = $request->input('phone');
 
+    // Validate phone format
+    $isValidPhone = preg_match('/^07[2-8]\d{7}$/', $phone);
 
+    if (!$isValidPhone) {
+        return response()->json([
+            'valid' => false,
+            'exists' => false,
+            'message' => 'Invalid phone number format. It must be 10 digits and start with 072-078.',
+        ]);
+    }
+
+    // Check if the phone exists
+    $exists = Engineer::where('phone', $phone)->exists();
+
+    return response()->json([
+        'valid' => true,
+        'exists' => $exists,
+        'message' => $exists ? 'This phone number is already taken.' : '',
+    ]);
 }
 
+public function checkEmail(Request $request)
+{
+    $email = $request->input('email');
+
+    // Validate email format
+    $isValidEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+
+    if (!$isValidEmail) {
+        return response()->json([
+            'valid' => false,
+            'exists' => false,
+            'message' => 'Invalid email format.',
+        ]);
+    }
+
+    // Check if the email exists
+    $exists = Engineer::where('email', $email)->exists();
+
+    return response()->json([
+        'valid' => true,
+        'exists' => $exists,
+        'message' => $exists ? 'This email address is already taken.' : '',
+    ]);
+}
+
+public function createApplication()
+{
+    return view('application'); // Ensure this view contains only the form
+}
+
+}
 

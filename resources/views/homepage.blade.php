@@ -114,7 +114,8 @@
                 </div>
             </div>
         </div>
-        
+
+
         
         <!-- Carousel End -->
 
@@ -253,35 +254,55 @@
         </div> --}}
 
         <!-- Modal -->
-        <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="resultsModalLabel">Engineers in <span
-                                id="department-name"></span></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table id="engineersTable" class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Department</th>
-                                    <th>Address</th>
-                                    <th>Phone</th>
-                                </tr>
-                            </thead>
-                            <tbody id="engineer-list">
-                                <!-- Data will populate here -->
-                            </tbody>
-                        </table>
-                    </div>
+        <!-- Modal -->
+       <!-- Success Modal -->
+@if(session('success'))
+<div class="modal fade show" id="successModal" tabindex="-1" style="display: block;" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <!-- Success Icon -->
+                <div class="mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="green" class="bi bi-check-circle" viewBox="0 0 16 16">
+                        <path d="M15.854 7.146a.5.5 0 0 0-.708-.708L7.5 14.293 4.354 11.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l8-8z"/>
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0-1A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
+                    </svg>
                 </div>
+                <!-- Title -->
+                <h5 class="mb-4">Registration Successful</h5>
+                <!-- Information -->
+                <p>Your form has been submitted successfully!</p>
             </div>
         </div>
+    </div>
+</div>
+@endif
+
+<!-- Form (Initially visible) -->
+<div id="form-container" class="{{ session('success') ? 'd-none' : '' }}">
+<!-- Your form content here -->
+<form method="POST" action="">
+    @csrf
+    <!-- Form Fields -->
+    <button type="submit">Submit</button>
+</form>
+</div>
+
+<!-- Redirect Script (Optional) -->
+<script>
+// Hide form and show success message for 5 seconds before redirecting
+if ({{ session('success') ? 'true' : 'false' }}) {
+    setTimeout(function() {
+        document.getElementById('form-container').style.display = 'none'; // Hide form after success
+        window.location.href = "{{ route('homepage') }}"; // Redirect to homepage after 5 seconds
+    }, 1000); // 5 seconds delay
+}
+</script>
+
+    
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
         <script>
             // When a department is clicked
